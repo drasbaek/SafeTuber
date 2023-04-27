@@ -1,11 +1,6 @@
 from pytube import Channel
 import pytube
-from yt_dlp import YoutubeDL
 from pathlib import Path
-from tqdm import tqdm
-from moviepy.editor import *
-import os
-import subprocess
 
 def get_channel_vids(channel_url):
     # define channel
@@ -21,7 +16,7 @@ def download_mp4(outpath, url, max_duration):
     yt = pytube.YouTube(url)
 
     # check duration and name
-    duration = yt.length
+    duration = yt.length / 60
     name = yt.title
 
     # if duration is too long, skip
@@ -51,7 +46,7 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
 
         try:
-            download_mp4(outpath, url, max_duration = 720)
+            download_mp4(outpath, url, max_duration_minutes = 15)
             n_downloads += 1
 
         except:
@@ -71,11 +66,14 @@ def main():
 
 
 #if __name__ == "__main__":
-    #<main()
+    #main()
 
-# define channel
-channel = Channel("https://www.youtube.com/channel/UCci2c90HJbY0VAS3_eLF3Wg/videos")
 
-video_urls = channel.video_urls[:10]
+# test for single video
+url = "https://www.youtube.com/watch?v=2uvV1-02UCU"
 
-print(video_urls)
+yt = pytube.YouTube(url)
+
+stream = yt.streams.filter(only_audio=True)[0]
+
+stream.download()
