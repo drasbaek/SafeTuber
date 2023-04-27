@@ -11,7 +11,7 @@ def get_channel_vids(channel_url):
 
     return video_urls
 
-def download_mp4(outpath, url, max_duration):
+def download_audio(outpath, url, max_duration):
     # create yt object
     yt = pytube.YouTube(url)
 
@@ -29,7 +29,6 @@ def download_mp4(outpath, url, max_duration):
         stream = yt.streams.filter(only_audio=True)[0]
         # download
         stream.download(filename="{}.mp3".format(name), output_path=outpath)
-    
 
 
 def download_channel(n_vids, video_urls, outpath):
@@ -46,7 +45,7 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
 
         try:
-            download_mp4(outpath, url, max_duration_minutes = 15)
+            download_audio(outpath, url, max_duration_minutes = 15)
             n_downloads += 1
 
         except:
