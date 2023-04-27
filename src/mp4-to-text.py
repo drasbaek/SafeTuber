@@ -73,6 +73,18 @@ def concatenate_chunks(text_chunks):
     return joined_chunks
 
 
+def clean_text(text_chunks):
+    # remove duplicates
+    text_chunk_no_dup = remove_duplicates(text_chunks)
+
+    # concatenate chunks
+    text_chunks_concat = concatenate_chunks(text_chunk_no_dup)
+
+    print(text_chunks_concat)
+
+    return text_chunks_concat
+
+
 def main():
     '''
     transcriber = initialize_transcriber()
@@ -84,17 +96,12 @@ def main():
     with open("transcript.json", "r") as f:
         text_chunks = json.load(f)
     
-    # remove duplicates
-    text_chunks_1 = remove_duplicates(text_chunks)
-
-    # concatenate chunks
-    text_chunks_2 = concatenate_chunks(text_chunks_1)
-
-    print(len(text_chunks_2))
+    # clean text
+    text_chunks_cln = clean_text(text_chunks)
 
     # write dict to json
     with open("transcript_clean.json", "w") as f:
-         json.dump(text_chunks_2, f)
+         json.dump(text_chunks_cln, f)
     
 
 if __name__ == "__main__":
