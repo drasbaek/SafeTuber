@@ -12,7 +12,7 @@ def get_channel_vids(channel_url):
     channel = Channel(channel_url)
 
     # get 5 most recent videos
-    video_urls = channel.video_urls[1:30]
+    video_urls = channel.video_urls[1:50]
 
     return video_urls
 
@@ -25,7 +25,7 @@ def download_mp4(outpath, url, max_duration):
     duration = info_dict.get('duration')
 
     # if duration is too long, skip
-    if duration > 720:
+    if duration > 1200:
         print("Video too long, skipping to next..." + url)
         return 0 # return 0 for fail
 
@@ -66,7 +66,7 @@ def download_channel(n_vids, video_urls, outpath):
             print("Error downloading video: ", url)
 
 def main():
-    input_channel = "https://www.youtube.com/channel/UCg7lal8IC-xPyKfgH4rdUcA"
+    input_channel = "https://www.youtube.com/channel/UCERUmrDh9hmqEXBsnYFNTIA"
 
     path = Path(__file__)
     outpath = path.parents[1] / "out"
