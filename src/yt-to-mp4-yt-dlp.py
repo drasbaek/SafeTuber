@@ -1,0 +1,91 @@
+from pytube import Channel
+import pytube
+from yt_dlp import YoutubeDL
+from pathlib import Path
+from tqdm import tqdm
+from moviepy.editor import *
+import os
+import subprocess
+'''
+def get_channel_vids(channel_url):
+    # define channel
+    channel = Channel(channel_url)
+
+    # get 5 most recent videos
+    video_urls = channel.video_urls[1:20]
+
+    return video_urls
+
+def download_mp4(outpath, url, max_duration):
+    # get info
+    ydl = YoutubeDL()
+    info_dict = ydl.extract_info(url, download=False)
+
+    # check duration
+    duration = info_dict.get('duration')
+
+    # if duration is too long, skip
+    if duration > 720:
+        print("Video too long, skipping to next..." + url)
+        return 0 # return 0 for fail
+
+    # else download
+    else:
+        ydl_opts = {
+        'outtmpl': str(outpath) + '/%(title)s.%(ext)s',
+        # set format to 240p
+        'format': 'bestvideo[height<=240]+bestaudio/best[height<=240]',
+        }
+
+        with YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+            return 1 # return 1 for success
+
+
+def download_channel(n_vids, video_urls, outpath):
+    # get max n_vids from channel
+    max_attempts = len(video_urls)
+
+    # set download and attempt counters
+    n_downloads = 0
+    n_attempt = 0  
+
+    # download videos
+    while n_downloads < n_vids and n_attempt < max_attempts:
+        url = video_urls[n_attempt]
+    
+        try:
+            success_fail = download_mp4(outpath, url, max_duration = 720)
+            n_downloads += success_fail
+            n_attempt += 1
+        
+        except:
+            print("Error downloading video: ", url)
+            n_attempt += 1
+
+def main():
+    input_channel = "https://www.youtube.com/channel/UCg7lal8IC-xPyKfgH4rdUcA"
+
+    path = Path(__file__)
+    outpath = path.parents[1] / "out"
+
+    # get channel videos
+    video_urls = get_channel_vids(input_channel)
+
+    # download videos
+    download_channel(n_vids = 2, video_urls = video_urls, outpath = outpath)
+
+if __name__ == "__main__":
+    main()
+'''
+yt_url = "https://www.youtube.com/watch?v=lMYWY5ElJmk"
+yt = pytube.YouTube(yt_url)
+stream = yt.streams.filter(only_audio=True)[0]
+stream.download(filename="audio.mp3")
+
+
+
+
+
+
+
