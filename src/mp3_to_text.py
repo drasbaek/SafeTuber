@@ -16,7 +16,7 @@ def initialize_transcriber():
     return transcriber
 
 def transcribe_audio(filename, transcriber):
-    file_path = "./out/" + filename
+    file_path = "./audio_files/" + filename
 
     # get audio
     transcript_dict = transcriber(file_path)
@@ -86,15 +86,15 @@ def clean_text(text_chunks):
 
 
 def main():
-    '''
+    
     transcriber = initialize_transcriber()
     filename = "MORE NEW TRACKS!! THIS THE BEST WAVE SO FAR!! [MK8D].wav"
     text_chunks = transcribe_audio(filename, transcriber)
-    '''
+    
     
     # read dict from json
-    with open("transcript.json", "r") as f:
-        text_chunks = json.load(f)
+    #with open("transcript.json", "r") as f:
+        #text_chunks = json.load(f)
     
     # clean text
     text_chunks_cln = clean_text(text_chunks)
