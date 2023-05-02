@@ -11,12 +11,12 @@ def get_channel_vids(channel_url):
     # define channel
     channel = Channel(channel_url)
 
-    # get 5 most recent videos
+    # get 50 most recent videos
     video_urls = channel.video_urls[1:50]
 
     return video_urls
 
-def download_mp4(outpath, url, max_duration):
+def download_mp4(outpath, url, max_duration, min_duration):
     # get info
     ydl = YoutubeDL()
     info_dict = ydl.extract_info(url, download=False)
@@ -28,6 +28,10 @@ def download_mp4(outpath, url, max_duration):
     if duration > 1200:
         print("Video too long, skipping to next..." + url)
         return 0 # return 0 for fail
+    
+    if duration < 60:
+        print("Video too short, skipping to next..." + url)
+        return 0
 
     # else download
     else:
@@ -59,7 +63,7 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
     
         try:
-            success_fail = download_mp4(outpath, url, max_duration = 720)
+            success_fail = download_mp4(outpath, url, max_duration=720, min_duration=60)
             n_downloads += success_fail
         
         except:
