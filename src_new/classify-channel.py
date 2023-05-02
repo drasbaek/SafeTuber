@@ -7,8 +7,6 @@ from tqdm import tqdm
 from moviepy.editor import *
 from transformers import pipeline
 import torch
-import re
-import json
 from utils import *
 import pandas as pd
 import os
@@ -219,8 +217,6 @@ def main():
 
         # calculate toxicity aggregates
         pct_toxic, toxic_comments = toxicity_aggregates(all_text_chunks, classifications)
-
-        print(all_text_chunks)
 
         # append to dataframe
         data.at[i, "transcript_chunks"] = all_text_chunks
