@@ -8,8 +8,12 @@ source ./safertube_env/bin/activate
 # install requirements
 python3 -m pip install -r requirements.txt
 
+# install ffmpeg
+sudo apt update && sudo apt upgrade
+sudo apt install ffmpeg
+
 # run script for training and classifying
-python3 src/yt-to-mp3.py
+python3 src_new/classify_channel.py
 
 # deactivate virtual environment
 deactivate safertube_env
