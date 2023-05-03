@@ -1,10 +1,8 @@
 # load packages
 from pytube import Channel
-import pytube
 from yt_dlp import YoutubeDL
 from pathlib import Path
 from tqdm import tqdm
-from moviepy.editor import *
 from transformers import pipeline
 import torch
 from utils import *
@@ -22,6 +20,10 @@ def define_paths():
     # define outpath
     outpath = path.parents[1] / "out"
 
+    # create dir for audio files if it doesn't exist
+    if not os.path.exists(path.parents[1] / "audio_files"):
+        os.makedirs(path.parents[1] / "audio_files")
+    
     # define path to temporary audio storage
     audio_path = path.parents[1] / "audio_files"
 
@@ -154,7 +156,7 @@ def toxicity_aggregates(text_chunks, classifications):
 
     # get a toxic comment if there is one
     if n_toxic != 0:
-        pct_toxic = n_toxic / n_comments
+        pct_toxic = float(n_toxic) / float(n_comments)
         # get all toxic comments
         toxic_comments = [text_chunks[i] for i in range(len(text_chunks)) if classifications[i] == "toxic"]
     else:
