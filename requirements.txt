@@ -1,1 +1,7 @@
-
+moviepy==1.0.3
+pandas==1.5.3
+pytube==12.1.0
+torch==1.12.1
+tqdm==4.64.1
+transformers==4.28.1
+yt_dlp==2023.3.4
