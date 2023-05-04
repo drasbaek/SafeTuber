@@ -1,0 +1,6 @@
+Channels for analysis must meet the following criteria:
+    1. Have some videos that are longer than 2 minutes and shorter than 2 hours.
+    2. Have some videos that are not age restricted nor limited by any georestrictions.
+    3. Produce verbal content, not just visual.
+    4. Primary language must be English.
+    5. Not be exclusively a YouTube Shorts channel.
