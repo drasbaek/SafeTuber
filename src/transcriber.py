@@ -1,4 +1,3 @@
-from pytube import Channel
 from yt_dlp import YoutubeDL
 from pathlib import Path
 from tqdm import tqdm
@@ -45,8 +44,7 @@ def get_channel_vids(channel_url):
 
     # Run your code
     ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 
-                'playlistend': 20,
-                'external_downloader_args': ['-loglevel', 'panic']
+                'playlistend': 20
                 #'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
                 }
     
@@ -127,12 +125,14 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
     
         try:
-            success_fail = download_mp4(outpath, url, max_duration=720, min_duration=60)
+            success_fail = download_mp4(outpath, url, max_duration=1800, min_duration=120)
             n_downloads += success_fail
-            used_urls.append(url)
         
         except:
             print("Error downloading video: ", url)
+        
+        if success_fail == 1:
+            used_urls.append(url)
     
     # return used urls
     return used_urls
@@ -182,7 +182,7 @@ def main():
         video_urls = get_channel_vids(channel_url)
 
         # download videos
-        used_urls = download_channel(n_vids = 1, video_urls = video_urls, outpath = audio_path)
+        used_urls = download_channel(n_vids = 2, video_urls = video_urls, outpath = audio_path)
 
         # define empty list to store text chunks
         all_text_chunks = []
