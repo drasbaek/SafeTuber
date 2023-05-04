@@ -11,8 +11,5 @@ python3 -m pip install -r requirements.txt
 # install ffmpeg
 brew install ffmpeg
 
-# run script for training and classifying
-python3 src_new/classify_channel.py
-
 # deactivate virtual environment
 deactivate safertube_env
