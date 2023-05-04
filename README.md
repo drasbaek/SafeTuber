@@ -18,8 +18,8 @@ To install requirements, create a virtual environment and install ffmpeg, run th
 bash setup_mac.sh     # for MacOS users
 bash setup_linux.sh   # for Linux users
 ```
-
-## Running the Analysis (Top 200 channels)
+## Usage
+### Running the Analysis (Top 200 channels)
 To run the analysis, you must first run `transcriber.py` which obtains video urls, extracts audio files, transcribes them and merges it into chunks for each channel:
 ```
 python src/transcriber.py
@@ -29,5 +29,33 @@ These, along with the number of videos to analyze per channel (default is 4), ca
 ```
 python src/transcriber.py --model "openai/whisper-small" --n_vids 5     # uses whisper small to transcribe, analyzes 5 videos per channel
 ```
+
+Based on the transcriptions, classification can be completed with `classifier.py`:
+```
+python src/classifier.py
+```
+The results are saved to the `out` directory as `top-youtubers-classified.csv`
+
+
+### Run analysis for new Channel
+It is also possible to run the analysis for a new channel that you wish to investigate from its url
+```
+python src/transcribe_classify_new.py --url "https://www.youtube.com/@cognitivescienceclubatucda6837"
+```
+Results will be printed to the terminal <br>.
+Please note that channels must confirm with requirements specified in `channel_requirements.txt` in order for the analysis to be possible.
+
+## Results
+The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory:
+
+## Discussion of Results
+
+## Disclaimer
+
+
+
+
+
+
 
 
