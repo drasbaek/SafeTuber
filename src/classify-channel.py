@@ -197,7 +197,7 @@ def main():
     inpath, outpath, audio_path = define_paths()
 
     # load data from inpath
-    data = pd.read_csv(inpath / "top-youtubers.csv")
+    data = pd.read_csv(inpath / "top-youtubers-curated.csv")
 
     # only keep two random rows (temp)
     data = data.sample(n = 5)
