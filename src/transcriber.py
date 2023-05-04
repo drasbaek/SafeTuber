@@ -44,7 +44,7 @@ def get_channel_vids(channel_url):
     sys.stdout = captured_output
 
     # Run your code
-    ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 'playlistend': 10}
+    ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 'playlistend': 20}
     with YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(
             channel_url,
@@ -92,8 +92,7 @@ def download_mp4(outpath, url, max_duration, min_duration):
         'format': 'bestaudio/best',
         'postprocessors': [{
         'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'wav',
-        'quiet': True,
+        'preferredcodec': 'wav'
     }],
         }
 
@@ -135,8 +134,6 @@ def transcribe_audio(filename, transcriber, audio_path):
     # remove timestamps
     text_chunks = [item["text"] for item in text_chunks]
 
-    print(text_chunks)
-
     return text_chunks
 
 def main():
@@ -168,7 +165,7 @@ def main():
         video_urls = get_channel_vids(channel_url)
 
         # download videos
-        download_channel(n_vids = 2, video_urls = video_urls, outpath = audio_path)
+        download_channel(n_vids = 4, video_urls = video_urls, outpath = audio_path)
 
         # define empty list to store text chunks
         all_text_chunks = []
