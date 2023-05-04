@@ -35,7 +35,7 @@ def get_channel_vids(channel_url):
     Uses yt_dlp to get the video urls from a channel url.
     It is necessary to obtain these urls from the terminal output as extract_info does not return those
     """
-    print("Getting video urls...")
+    #print("Getting video urls...")
 
     # Create a StringIO object to capture stdout
     captured_output = io.StringIO()
@@ -44,7 +44,11 @@ def get_channel_vids(channel_url):
     sys.stdout = captured_output
 
     # Run your code
-    ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 'playlistend': 20}
+    ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 
+                'playlistend': 20
+                #'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
+                }
+    
     with YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(
             channel_url,
@@ -90,6 +94,8 @@ def download_mp4(outpath, url, max_duration, min_duration):
         ydl_opts = {
         'outtmpl': str(outpath) + '/%(title)s.%(ext)s',
         'format': 'bestaudio/best',
+        #'ignoreerrors': True , # necessary to skip videos that fail (e.g. due to age or country restrictions)
+        'quiet': True, # don't print to stdout
         'postprocessors': [{
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'wav'
@@ -97,11 +103,13 @@ def download_mp4(outpath, url, max_duration, min_duration):
         }
 
         with YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
-            return 1 # return 1 for success
+            try:
+                ydl.download([url])
+                return 1 # return 1 for success
+            except:
+                return 0
 
 def download_channel(n_vids, video_urls, outpath):
-    print("Downloading videos...")
     # get max n_vids from channel
     max_attempts = len(video_urls)
 
@@ -122,11 +130,10 @@ def download_channel(n_vids, video_urls, outpath):
             print("Error downloading video: ", url)
 
 def transcribe_audio(filename, transcriber, audio_path):
-    print("Transcribing audio...")
     file_path = str(audio_path / filename)
 
     # get audio
-    transcript_dict = transcriber(file_path)
+    transcript_dict = transcriber(file_path, max_new_tokens = 448)
 
     # save dict to file
     text_chunks = transcript_dict['chunks']
@@ -144,6 +151,7 @@ def main():
     data = pd.read_csv(inpath)
 
     # only keep two random rows (temp)
+    data = data.head(200)
     data = data.sample(n = 2)
 
     # initialize models
@@ -156,8 +164,9 @@ def main():
     data["transcript_chunks"] = None
     data["video_urls"] = None
 
-    # loop through all channels (rows)
-    for i, row in data.iterrows():
+    # loop through all channels (rows) with tqdm
+    print("Downloading videos and transcribing...")
+    for i, row in tqdm(data.iterrows(), total = len(data)):
         # get channel url
         channel_url = row["ha-link"]
 
@@ -165,7 +174,7 @@ def main():
         video_urls = get_channel_vids(channel_url)
 
         # download videos
-        download_channel(n_vids = 4, video_urls = video_urls, outpath = audio_path)
+        download_channel(n_vids = 1, video_urls = video_urls, outpath = audio_path)
 
         # define empty list to store text chunks
         all_text_chunks = []
