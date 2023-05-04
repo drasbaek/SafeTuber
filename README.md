@@ -38,9 +38,9 @@ The results are saved to the `out` directory as `top-youtubers-classified.csv`
 
 
 ### Run analysis for new Channel
-It is also possible to run the analysis for a new channel that you wish to investigate from its url
+It is also possible to run the analysis for a new channel that you wish to investigate from its url. The `--model` and `n_vids` arguments can also be specified here, for example:
 ```
-python src/transcribe_classify_new.py --url "https://www.youtube.com/@cognitivescienceclubatucda6837"
+python src/transcribe_classify_new.py --url "https://www.youtube.com/@cognitivescienceclubatucda6837" --model "openai/whisper-base.en" --n_vids 3
 ```
 Results will be printed to the terminal <br>.
 Please note that channels must confirm with requirements specified in `channel_requirements.txt` in order for the analysis to be possible.
