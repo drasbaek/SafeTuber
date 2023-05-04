@@ -45,7 +45,8 @@ def get_channel_vids(channel_url):
 
     # Run your code
     ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 
-                'playlistend': 20
+                'playlistend': 20,
+                'external_downloader_args': ['-loglevel', 'panic']
                 #'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
                 }
     
@@ -112,6 +113,9 @@ def download_mp4(outpath, url, max_duration, min_duration):
 def download_channel(n_vids, video_urls, outpath):
     # get max n_vids from channel
     max_attempts = len(video_urls)
+    
+    # initialize list of used urls
+    used_urls = []
 
     # set download and attempt counters
     n_downloads = 0
@@ -125,9 +129,13 @@ def download_channel(n_vids, video_urls, outpath):
         try:
             success_fail = download_mp4(outpath, url, max_duration=720, min_duration=60)
             n_downloads += success_fail
+            used_urls.append(url)
         
         except:
             print("Error downloading video: ", url)
+    
+    # return used urls
+    return used_urls
 
 def transcribe_audio(filename, transcriber, audio_path):
     file_path = str(audio_path / filename)
@@ -174,7 +182,7 @@ def main():
         video_urls = get_channel_vids(channel_url)
 
         # download videos
-        download_channel(n_vids = 1, video_urls = video_urls, outpath = audio_path)
+        used_urls = download_channel(n_vids = 1, video_urls = video_urls, outpath = audio_path)
 
         # define empty list to store text chunks
         all_text_chunks = []
@@ -197,7 +205,7 @@ def main():
         random.shuffle(all_text_chunks)
 
         # append to dataframe
-        data.at[i, "video_urls"] = video_urls
+        data.at[i, "video_urls"] = used_urls
         data.at[i, "transcript_chunks"] = all_text_chunks
 
     # save dataframe to outpath
