@@ -9,8 +9,5 @@ source ./safertube_env/bin/activate
 python3 -m pip install -r requirements.txt
 
 # install ffmpeg
-sudo apt update && sudo apt upgrade
+#sudo apt update && sudo apt upgrade
 sudo apt install ffmpeg
-
-# deactivate virtual environment
-deactivate safertube_env
