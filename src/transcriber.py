@@ -93,6 +93,7 @@ def download_mp4(outpath, url, max_duration, min_duration):
         'postprocessors': [{
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'wav',
+        'quiet': True,
     }],
         }
 
