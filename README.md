@@ -48,9 +48,11 @@ Please note that channels must confirm with requirements specified in `channel_r
 ## Results
 The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory:
 
-## Discussion of Results
+## Limitations
+Some of the central limitations of this project should be addressed. <br>
+Firstly, it only looks at YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos. Also, channels are only analyzed in terms of their most recent videos and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. Finally, `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications as a closer inspection of the results also will reveal. <br>
 
-## Disclaimer
+Despite all of this, the Safetubers pipeline provides skeleton future tools that can analyze toxicity on YouTube channels in a fast manner using objective criteria.
 
 
 
