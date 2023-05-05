@@ -21,7 +21,7 @@ def arg_parse():
 
     # add arguments
     parser.add_argument('-n', '--n_vids', default=4, type=int, help='Number of videos to be analyzed')
-    parser.add_argument('-m', '--model', default="openai/whisper-medium.en", help='Model to be used for transcription')
+    parser.add_argument('-m', '--model', default="openai/whisper-base.en", help='Model to be used for transcription')
     parser.add_argument('-u', '--url', default='https://www.youtube.com/channel/UCuAXFkgsw1L7xaCfnd5JJOw', help='YouTube URL of channel')
 
     # parse arguments
