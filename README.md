@@ -1,5 +1,5 @@
 # Assignment 5 (Self-Assigned): The SafeTuber Project
-<img width="1551" alt="Screenshot 2023-05-04 at 15 03 03" src="https://user-images.githubusercontent.com/80207895/236212819-b9fd96a1-86c1-4ec6-b5d2-60d6407b39d6.png">
+<img width="1079" alt="image" src="https://user-images.githubusercontent.com/80207895/236394061-a946773e-498e-44f1-b871-9e1e267804d4.png">
 
 ## Description
 This repository forms the solution to self-chosen assignment 5 by Anton Drasbæk Schiønning (202008161) in the course "Language Analytics" at Aarhus University. <br>
@@ -11,7 +11,7 @@ Based on a ranking of the most popular YouTube channels by [HypeAuditor](https:/
 The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents to assess which content creators are child-friendly and who are not. "Safetubers" analysis of 200 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process.
 
 ## Setup
-To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems vary in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis (please download ffmpeg manually and install requirements if using Windows). <br>
+To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems differ in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis (please download ffmpeg manually and install requirements if using Windows). <br>
 
 To install requirements, create a virtual environment and install ffmpeg, run the following from the root directory
 ```
@@ -35,22 +35,24 @@ Based on the transcriptions, classification can be completed with `classifier.py
 python src/classifier.py
 ```
 The results are saved to the `out` directory as `top-youtubers-classified.csv`
-
+<br/><br/>
 
 ### Run analysis for new Channel
-It is also possible to run the analysis for a new channel that you wish to investigate from its url. The `--model` and `n_vids` arguments can also be specified here, for example:
+It is also possible to run the analysis for a new channel that you wish to investigate from its url. The `--model` and `--n_vids` arguments can also be specified here, for example:
 ```
 python src/transcribe_classify_new.py --url "https://www.youtube.com/@cognitivescienceclubatucda6837" --model "openai/whisper-base.en" --n_vids 3
 ```
-Results will be printed to the terminal <br>.
-Please note that channels must confirm with requirements specified in `channel_requirements.txt` in order for the analysis to be possible.
+Results will be printed to the terminal. <br>
+Please note that channels must confirm with requirements specified in `channel_reqs.txt` in order for the analysis to be possible.
 
 ## Results
 The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory:
 
-## Discussion of Results
+## Limitations
+Some of the central limitations of this project should be addressed. <br>
+Firstly, it only looks at YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos. Also, channels are only analyzed in terms of their most recent videos and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. Finally, `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications as a closer inspection of the results also will reveal. <br>
 
-## Disclaimer
+Despite all of this, the Safetubers pipeline provides skeleton future tools that can analyze toxicity on YouTube channels in a fast manner using objective criteria.
 
 
 
