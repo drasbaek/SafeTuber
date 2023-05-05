@@ -1,10 +1,25 @@
-# Desc: Utility functions for the project
-'''
-'''
+""" utils.py
+Author: 
+    Anton Drasbæk Schiønning (202008161), GitHub: @drasbaek
+
+Desc:
+    Provides utility functions for the SafeTuber pipeline.
+    It is concerned with functions for cleaning and processing the transcripts.
+"""
+
 def remove_long_chunks(text_chunks):
     '''
-    Removes long chunks as most of these will be due to an error where a word is repeated often in the audio transcription
+    This function removes chunks that are too long.
+    Circumvents an issue with Whisper transcriptions where word / phrases often are repeated many times in the same chunk.
+
+    Args:
+        text_chunks (list): list of text chunks
+    
+    Returns:
+        new_text_chunks (list): list of text chunks without chunks that are too long
+
     '''
+
     # initialize new list
     new_text_chunks = []
 
@@ -23,6 +38,18 @@ def remove_long_chunks(text_chunks):
 
 
 def remove_duplicates(text_chunks):
+    '''
+    This function removes duplicate chunks.
+    Circumvents issue with Whisper transcriptions where repeat chunks occur by fault.
+
+    Args:
+        text_chunks (list): list of text chunks
+    
+    Returns:
+        new_text_chunks (list): list of text chunks without duplicate chunks
+
+    '''
+
     # initialize new list
     new_text_chunks = []
 
@@ -44,6 +71,23 @@ def remove_duplicates(text_chunks):
     return new_text_chunks
 
 def concatenate_chunks(text_chunks):
+    '''
+    This function removes concatenate chunks.
+    Some chunks based on timestampts are short, uncompleted sentences.
+    This function concatenates these based on the following rules:
+        1. If the current string is shorter than 10 words, it is concatenated with the next string.
+        2. If the current string does not end in a period, it is concatenated with the next string.
+        3. If the current string is longer than 10 words and ends in a period, it is added to the list of joined chunks.
+    
+    This achieves a more natural language flow in the final transcript.
+
+    Args:
+        text_chunks (list): list of text chunks
+    
+    Returns:
+        joined_chunks (list): list of text chunks with concatenated chunks
+
+    '''
     joined_chunks = []
     current_string = ""
 
@@ -69,13 +113,24 @@ def concatenate_chunks(text_chunks):
 
 
 def clean_text(text_chunks):
+    '''
+    Combines the above functions to clean the text chunks in single pipeline.
+
+    Args:
+        text_chunks (list): list of unprocessed text chunks
+    
+    Returns:
+        text_chunks_processed (list): list of processed text chunks
+        
+    '''
+
     # remove long chunks
     text_chunks = remove_long_chunks(text_chunks)
 
     # remove duplicates
-    text_chunk_no_dup = remove_duplicates(text_chunks)
+    text_chunks_no_dup = remove_duplicates(text_chunks)
 
     # concatenate chunks
-    text_chunks_concat = concatenate_chunks(text_chunk_no_dup)
+    text_chunks_processed = concatenate_chunks(text_chunks_no_dup)
 
-    return text_chunks_concat
+    return text_chunks_processed
