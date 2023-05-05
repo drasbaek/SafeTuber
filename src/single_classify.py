@@ -1,6 +1,6 @@
 """ single_classify.py
 Utilizes functions from the transcriper.py and classifier.py to setup a pipeline for new channel classifications.
-Channels provided for this analysis must conform with requirements specified in channel_reqs.txt
+Channels provided for this analysis must conform with requirements specified in channel_reqs.txt.
 
 """
 
@@ -21,7 +21,7 @@ def arg_parse():
 
     # add arguments
     parser.add_argument('-n', '--n_vids', default=4, type=int, help='Number of videos to be analyzed')
-    parser.add_argument('-m', '--model', default="openai/whisper-base.en", help='Model to be used for transcription')
+    parser.add_argument('-m', '--model', default="openai/whisper-medium.en", help='Model to be used for transcription')
     parser.add_argument('-u', '--url', default='https://www.youtube.com/channel/UCuAXFkgsw1L7xaCfnd5JJOw', help='YouTube URL of channel')
 
     # parse arguments
@@ -66,7 +66,7 @@ def toxicity_output(all_text_chunks, classifications):
     # get a toxic comment if there is one
     if n_toxic != 0:
         # calculate percentage of toxic comments
-        pct_toxic = float(n_toxic) / float(n_comments)
+        pct_toxic = round(float(n_toxic) / float(n_comments), 4)
         
         # get all toxic comments
         toxic_comments = [all_text_chunks[i] for i in range(len(all_text_chunks)) if classifications[i] == "toxic"]
@@ -101,7 +101,7 @@ def main():
     audio_path = create_audio_path()
 
     # get channel videos
-    print("(2/7) Getting channel vids...")
+    print("(2/7) Getting video urls...")
     video_urls = get_channel_vids(args.url)
 
     # download videos
@@ -109,7 +109,7 @@ def main():
     used_urls = download_channel(n_vids = args.n_vids, video_urls = video_urls, outpath = audio_path)
 
     # initialize transcriber and classifier
-    print("(4/7) Transcribing audio...")
+    print("(4/7) Initialize models and transcribe audio...")
     transcriber, classifier = initialize_models(args)
 
     # define empty list to store text chunks
