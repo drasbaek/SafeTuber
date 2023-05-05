@@ -149,7 +149,7 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
     
         try:
-            success_fail = download_mp4(outpath, url, max_duration=1800, min_duration=120)
+            success_fail = download_mp4(outpath, url, max_duration=2400, min_duration=120)
             n_downloads += success_fail
         
         except:
@@ -183,8 +183,8 @@ def main():
     data = pd.read_csv(inpath)
 
     # only keep two random rows (temp)
-    data = data.head(200)
-    data = data.sample(n = 2)
+    data = data.head(100)
+    #data = data.sample(n = 2)
 
     # initialize models
     transcriber = pipeline('automatic-speech-recognition', 
@@ -206,7 +206,7 @@ def main():
         video_urls = get_channel_vids(channel_url)
 
         # download videos
-        used_urls = download_channel(n_vids = 2, video_urls = video_urls, outpath = audio_path)
+        used_urls = download_channel(n_vids = 3, video_urls = video_urls, outpath = audio_path)
 
         # define empty list to store text chunks
         all_text_chunks = []
