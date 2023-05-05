@@ -11,7 +11,7 @@ Based on a ranking of the most popular YouTube channels by [HypeAuditor](https:/
 The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents to assess which content creators are child-friendly and who are not. "Safetubers" analysis of 200 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process.
 
 ## Setup
-To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems vary in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis (please download ffmpeg manually and install requirements if using Windows). <br>
+To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems differ in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis (please download ffmpeg manually and install requirements if using Windows). <br>
 
 To install requirements, create a virtual environment and install ffmpeg, run the following from the root directory
 ```
@@ -35,15 +35,15 @@ Based on the transcriptions, classification can be completed with `classifier.py
 python src/classifier.py
 ```
 The results are saved to the `out` directory as `top-youtubers-classified.csv`
-
+<br/><br/>
 
 ### Run analysis for new Channel
 It is also possible to run the analysis for a new channel that you wish to investigate from its url. The `--model` and `n_vids` arguments can also be specified here, for example:
 ```
 python src/transcribe_classify_new.py --url "https://www.youtube.com/@cognitivescienceclubatucda6837" --model "openai/whisper-base.en" --n_vids 3
 ```
-Results will be printed to the terminal <br>.
-Please note that channels must confirm with requirements specified in `channel_requirements.txt` in order for the analysis to be possible.
+Results will be printed to the terminal. <br>
+Please note that channels must confirm with requirements specified in `channel_reqs.txt` in order for the analysis to be possible.
 
 ## Results
 The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory:
