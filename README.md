@@ -1,5 +1,5 @@
 # Assignment 5 (Self-Assigned): The SafeTuber Project
-<img width="1551" alt="Screenshot 2023-05-04 at 15 03 03" src="https://user-images.githubusercontent.com/80207895/236212819-b9fd96a1-86c1-4ec6-b5d2-60d6407b39d6.png">
+<img width="1079" alt="image" src="https://user-images.githubusercontent.com/80207895/236394061-a946773e-498e-44f1-b871-9e1e267804d4.png">
 
 ## Description
 This repository forms the solution to self-chosen assignment 5 by Anton Drasbæk Schiønning (202008161) in the course "Language Analytics" at Aarhus University. <br>
@@ -38,7 +38,7 @@ The results are saved to the `out` directory as `top-youtubers-classified.csv`
 <br/><br/>
 
 ### Run analysis for new Channel
-It is also possible to run the analysis for a new channel that you wish to investigate from its url. The `--model` and `n_vids` arguments can also be specified here, for example:
+It is also possible to run the analysis for a new channel that you wish to investigate from its url. The `--model` and `--n_vids` arguments can also be specified here, for example:
 ```
 python src/transcribe_classify_new.py --url "https://www.youtube.com/@cognitivescienceclubatucda6837" --model "openai/whisper-base.en" --n_vids 3
 ```
