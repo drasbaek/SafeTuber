@@ -1,3 +1,27 @@
+""" transcriber.py
+Author: 
+    Anton Drasbæk Schiønning (202008161), GitHub: @drasbaek
+
+Desc:
+    Transcribes videos from youtube channels based on the channel url.
+    It utilizes the youtube-dl library to download the videos and the HuggingFace transformers library to transcribe the audio.
+    Specifically, OpenAI's Whisper is used to transcribe the obtained MP3 files.
+
+    Hence, this file covers the first 5 steps in the SafeTuber pipeline:
+        1. Identifying YouTube channel
+        2. Getting recent video urls
+        3. Downloading MP3s
+        4. Transcribing audio files
+        5. Merging and shuffling transcripts.
+
+    This script analyzes all the 200 channels in the top-youtubers-curated.csv file and provides transcriptions of their recent
+    videos in data/top-youtubers-transcribed.csv.
+
+Usage:
+    $ python src/transcriber.py --n_vids 4 --model "openai/whisper-medium.en"
+"""
+
+
 from yt_dlp import YoutubeDL
 from pathlib import Path
 from tqdm import tqdm
@@ -44,8 +68,8 @@ def get_channel_vids(channel_url):
 
     # Run your code
     ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 
-                'playlistend': 20
-                #'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
+                'playlistend': 20,
+                'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
                 }
     
     with YoutubeDL(ydl_opts) as ydl:
@@ -93,7 +117,7 @@ def download_mp4(outpath, url, max_duration, min_duration):
         ydl_opts = {
         'outtmpl': str(outpath) + '/%(title)s.%(ext)s',
         'format': 'bestaudio/best',
-        #'ignoreerrors': True , # necessary to skip videos that fail (e.g. due to age or country restrictions)
+        'ignoreerrors': True , # necessary to skip videos that fail (e.g. due to age or country restrictions)
         'quiet': True, # don't print to stdout
         'postprocessors': [{
         'key': 'FFmpegExtractAudio',

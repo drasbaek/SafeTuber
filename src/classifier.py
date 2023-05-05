@@ -1,3 +1,23 @@
+""" classifier.py
+Author: 
+    Anton Drasbæk Schiønning (202008161), GitHub: @drasbaek
+
+Desc:
+    Classifies transcripts from YouTube channels in chunks as either toxic or not toxic.
+    It utilizes a toxicity classification model from HuggingFace's model hub (https://huggingface.co/martin-ha/toxic-comment-model).
+    The model is a fine-tuned version of the DistilBERT model for toxicity classification (https://huggingface.co/distilbert-base-uncased).
+
+    Hence, this file covers the last two steps in the SafeTuber pipeline:
+        6. Classifying toxicity in chunks
+        7. Calculating average toxicity level for a channel
+
+    This script analyzes all the 200 channels in the top-youtubers-transcribed.csv file and provides transcriptions of their recent
+    videos in out/top-youtubers-classified.csv.
+
+Usage:
+    $ python src/classifier.py
+"""
+
 
 from pathlib import Path
 from transformers import pipeline
@@ -46,7 +66,7 @@ def toxicity_aggregates(text_chunks, classifications):
     # get a toxic comment if there is one
     if n_toxic != 0:
         # calculate percentage of toxic comments
-        pct_toxic = float(n_toxic) / float(n_comments)
+        pct_toxic = round(float(n_toxic) / float(n_comments), 4)
         
         # get all toxic comments
         toxic_comments = [text_chunks[i] for i in range(len(text_chunks)) if classifications[i] == "toxic"]
@@ -58,7 +78,7 @@ def toxicity_aggregates(text_chunks, classifications):
         toxic_comments = None
         pct_toxic = 0
 
-    return pct_toxic, toxic_comments
+    return n_comments, n_toxic, pct_toxic, toxic_comments
 
 def main():
     print("Classifying text chunks...")
@@ -83,13 +103,18 @@ def main():
         classifications = classify_transcript(transcript_chunks, classifier)
 
         # calculate toxicity aggregates
-        pct_toxic, toxic_comments = toxicity_aggregates(transcript_chunks, classifications)
+        n_comments, n_toxic, pct_toxic, toxic_comments = toxicity_aggregates(transcript_chunks, classifications)
         
-        data.loc[i, "toxic_comments"] = toxic_comments
+        # save data
+        data.loc[i, "n_comments"] = n_comments
+        data.loc[i, "n_toxic"] = n_toxic
         data.loc[i, "pct_toxic"] = pct_toxic
+        data.loc[i, "toxic_comments"] = toxic_comments
 
     # save data
     data.to_csv(outpath / "top-youtubers-classified.csv", index = False)
+
+
 
 if __name__ == "__main__":
     main()
