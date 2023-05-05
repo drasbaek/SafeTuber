@@ -26,7 +26,11 @@ def remove_long_chunks(text_chunks):
     # loop through chunks
     for text in text_chunks:
 
-        # if text is too long, skip
+        # if text is very long, abbreviate
+        if len(text.split()) > 50:
+            text = " ".join(text.split()[:50]) + " ..."
+        
+        # if text of medium length, skip
         if len(text.split()) > 25:
             continue
 
