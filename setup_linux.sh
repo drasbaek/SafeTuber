@@ -6,7 +6,7 @@ python3 -m venv safertube_env
 source ./safertube_env/bin/activate
 
 # install requirements
-python3 -m pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
 # install ffmpeg
 #sudo apt update && sudo apt upgrade
