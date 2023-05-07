@@ -195,7 +195,7 @@ def main():
     print("Downloading videos and transcribing...")
     for i, row in tqdm(data.iterrows(), total = len(data)):
         # get channel url
-        channel_url = row["ha-link"]
+        channel_url = row["channel_url"]
 
         # get channel videos
         video_urls = get_channel_vids(channel_url)
