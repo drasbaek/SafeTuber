@@ -26,9 +26,14 @@ def remove_long_chunks(text_chunks):
     # loop through chunks
     for text in text_chunks:
 
-        # if text is very long, abbreviate
-        if len(text.split()) > 50:
-            text = " ".join(text.split()[:50]) + " ..."
+        # if text is beyond maximum input length for classifier, we shorten to nearest punctuation
+        if len(text_chunk) > 512:
+            # make it shorter
+            text_chunk = text_chunk[:512]
+
+            # delete everything after last period or question mark
+            last_index = max(text_chunk.rfind(i) for i in ".?")
+            text_chunk = text_chunk[:last_index+1]
         
         # if text of medium length, skip
         if len(text.split()) > 25:
