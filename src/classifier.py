@@ -112,8 +112,8 @@ def main():
         data.loc[i, "toxic_comments"] = toxic_comments
 
     # save data
+    #data.to_csv(outpath / "top-youtubers-classified.csv", index = False)
     data.to_csv(outpath / "top-youtubers-classified.csv", index = False)
-
 
 
 if __name__ == "__main__":
