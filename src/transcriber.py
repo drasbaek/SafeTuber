@@ -39,8 +39,8 @@ def define_paths():
     path = Path(__file__)
 
     # define inpath
-    inpath = path.parents[1] / "data" / "top-youtubers-curated.csv"
-
+    inpath = path.parents[1] / "data" / "top-youtubers-raw.csv"
+    
     # define outpath
     outpath = path.parents[1] / "data"
 
@@ -58,7 +58,6 @@ def get_channel_vids(channel_url):
     Uses yt_dlp to get the video urls from a channel url.
     It is necessary to obtain these urls from the terminal output as extract_info does not return those
     """
-    #print("Getting video urls...")
 
     # Create a StringIO object to capture stdout
     captured_output = io.StringIO()
@@ -68,7 +67,7 @@ def get_channel_vids(channel_url):
 
     # Run your code
     ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 
-                'playlistend': 20,
+                'playlistend': 30,
                 'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
                 }
     
@@ -149,7 +148,7 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
     
         try:
-            success_fail = download_mp4(outpath, url, max_duration=2400, min_duration=120)
+            success_fail = download_mp4(outpath, url, max_duration=3000, min_duration=120)
             n_downloads += success_fail
         
         except:
@@ -180,11 +179,7 @@ def main():
     inpath, outpath, audio_path = define_paths()
 
     # load data from inpath
-    data = pd.read_csv(inpath)
-
-    # only keep two random rows (temp)
-    data = data.head(100)
-    #data = data.sample(n = 2)
+    data = pd.read_excel(inpath)
 
     # initialize models
     transcriber = pipeline('automatic-speech-recognition', 
