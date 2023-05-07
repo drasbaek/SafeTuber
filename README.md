@@ -1,5 +1,6 @@
 # Assignment 5 (Self-Assigned): The SafeTuber Project
-<img width="1079" alt="image" src="https://user-images.githubusercontent.com/80207895/236394061-a946773e-498e-44f1-b871-9e1e267804d4.png">
+![copy-test](https://user-images.githubusercontent.com/80207895/236698306-3499d444-c791-497b-a10b-2b6a7b087e9c.png)
+
 
 ## Description
 This repository forms the solution to self-chosen assignment 5 by Anton Drasbæk Schiønning (202008161) in the course "Language Analytics" at Aarhus University. <br>
@@ -8,7 +9,7 @@ The "SafeTubers" pipeline is a tool that quantifies the amount of toxic speech u
 
 Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube/), we have identified and analyzed 100 of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or main stream company channels (e.g. Netflix).
 
-The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents to assess which content creators are child-friendly and who are not. "Safetubers" analysis of 200 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process.
+The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents to assess which content creators are child-friendly and who are not. "Safetubers" analysis of 100 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process by combining utilizing multiple language models in a single pipeline.
 
 ## Setup
 To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems differ in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis. <br>
@@ -20,7 +21,7 @@ bash setup_linux.sh   # for Linux users
 ```
 
 ## Usage
-### Running the Analysis (Top 200 channels)
+### Running the Analysis (Top 100 channels)
 To run the analysis, you must first run `transcriber.py` which obtains video urls, extracts audio files, transcribes them and merges it into chunks for each channel:
 ```
 python src/transcriber.py
@@ -35,7 +36,7 @@ Based on the transcriptions, classification can be completed with `classifier.py
 ```
 python src/classifier.py
 ```
-The results are saved to the `out` directory as `top-youtubers-classified.csv`
+The results are saved to the `out` directory as `top-youtubers-classified.csv`.
 <br/><br/>
 
 ### Run analysis for new Channel
@@ -47,7 +48,17 @@ Results will be printed to the terminal. <br>
 Please note that channels must confirm with requirements specified in `channel_reqs.txt` in order for the analysis to be possible.
 
 ## Results
-The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory:
+Overall, X transcript chunks from 300 different videos were classified, xx% of which were deemed to be toxic.
+
+The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
+
+These results are based on videos analyzed the 7th of May 2023, results will vary if running the analysis again as it will be based on other videos.
+
+### Share of Completely Non-Toxic Channels
+
+### Toxicity by Channel (HypeAuditor) Category
+
+### Top 10 most Toxic channels compared to Average
 
 ## Limitations
 Some of the central limitations of this project should be addressed. <br>
