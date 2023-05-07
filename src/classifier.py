@@ -66,7 +66,7 @@ def toxicity_aggregates(text_chunks, classifications):
     # get a toxic comment if there is one
     if n_toxic != 0:
         # calculate percentage of toxic comments
-        pct_toxic = round(float(n_toxic) / float(n_comments), 4)
+        pct_toxic = round(float(n_toxic) / float(n_comments), 3)
         
         # get all toxic comments
         toxic_comments = [text_chunks[i] for i in range(len(text_chunks)) if classifications[i] == "toxic"]
