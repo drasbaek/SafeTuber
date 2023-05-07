@@ -1,5 +1,6 @@
 # Assignment 5 (Self-Assigned): The SafeTuber Project
-<img width="1079" alt="image" src="https://user-images.githubusercontent.com/80207895/236394061-a946773e-498e-44f1-b871-9e1e267804d4.png">
+![copy-test](https://user-images.githubusercontent.com/80207895/236698306-3499d444-c791-497b-a10b-2b6a7b087e9c.png)
+
 
 ## Description
 This repository forms the solution to self-chosen assignment 5 by Anton Drasbæk Schiønning (202008161) in the course "Language Analytics" at Aarhus University. <br>
