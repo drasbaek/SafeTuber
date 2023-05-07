@@ -9,7 +9,7 @@ The "SafeTubers" pipeline is a tool that quantifies the amount of toxic speech u
 
 Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube/), we have identified and analyzed 100 of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or main stream company channels (e.g. Netflix).
 
-The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents to assess which content creators are child-friendly and who are not. "Safetubers" analysis of 200 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process.
+The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents to assess which content creators are child-friendly and who are not. "Safetubers" analysis of 100 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process by combining utilizing multiple language models in a single pipeline.
 
 ## Setup
 To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems differ in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis. <br>
@@ -21,7 +21,7 @@ bash setup_linux.sh   # for Linux users
 ```
 
 ## Usage
-### Running the Analysis (Top 200 channels)
+### Running the Analysis (Top 100 channels)
 To run the analysis, you must first run `transcriber.py` which obtains video urls, extracts audio files, transcribes them and merges it into chunks for each channel:
 ```
 python src/transcriber.py
