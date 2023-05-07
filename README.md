@@ -36,7 +36,7 @@ Based on the transcriptions, classification can be completed with `classifier.py
 ```
 python src/classifier.py
 ```
-The results are saved to the `out` directory as `top-youtubers-classified.csv`
+The results are saved to the `out` directory as `top-youtubers-classified.csv`.
 <br/><br/>
 
 ### Run analysis for new Channel
@@ -48,7 +48,17 @@ Results will be printed to the terminal. <br>
 Please note that channels must confirm with requirements specified in `channel_reqs.txt` in order for the analysis to be possible.
 
 ## Results
-The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory:
+Overall, X transcript chunks from 300 different videos were classified, xx% of which were deemed to be toxic.
+
+The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
+
+These results are based on videos analyzed the 7th of May 2023, results will vary if running the analysis again as it will be based on other videos.
+
+### Share of Completely Non-Toxic Channels
+
+### Toxicity by Channel (HypeAuditor) Category
+
+### Top 10 most Toxic channels compared to Average
 
 ## Limitations
 Some of the central limitations of this project should be addressed. <br>
