@@ -48,7 +48,7 @@ Results will be printed to the terminal. <br>
 Please note that channels must confirm with requirements specified in `channel_reqs.txt` in order for the analysis to be possible.
 
 ## Results
-Overall, X transcript chunks from 300 different videos were classified, xx% of which were deemed to be toxic.
+Overall, 22316 transcript chunks from 300 different videos were classified, 3.6% of which were deemed to be toxic (796 toxic chunks).
 
 The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
 
