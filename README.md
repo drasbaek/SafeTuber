@@ -48,7 +48,7 @@ Results will be printed to the terminal. <br>
 Please note that channels must confirm with requirements specified in `channel_reqs.txt` in order for the analysis to be possible.
 
 ## Results
-Overall, 22316 transcript chunks from 300 different videos were classified, 3.6% of which were deemed to be toxic (796 toxic chunks).
+Overall, **22,316 transcript chunks from 300 different videos were classified**, 3.6% of which were deemed to be toxic (796 toxic chunks).
 
 The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
 
@@ -64,13 +64,12 @@ These results are based on videos analyzed the 7th of May 2023, results will var
 ![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/most-toxic-channels.png?raw=True)
 
 ## Limitations
-Some of the central limitations of this project should be addressed. <br>
-Firstly, it only looks at YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos. Also, channels are only analyzed in terms of their most recent videos and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. Finally, `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications as a closer inspection of the results also will reveal. <br>
+Some of the central limitations of this project should be addressed. <br/><br/>
+Firstly, it only looks at YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos. <br>
+Also, channels are only analyzed in terms of their most recent videos and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. <br>
+Finally, `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications as a closer inspection of the results also will reveal. <br>
 
-Despite all of this, the Safetubers pipeline provides skeleton future tools that can analyze toxicity on YouTube channels in a fast manner using objective criteria.
-
-
-
+Despite all of this, the Safetubers pipeline provides forms a skeleton for analyzing toxicity on YouTube using objective criteria, contributing to enhancing parental understanding of how all internet personalities may not be equally child-friendly.
 
 
 
