@@ -54,11 +54,14 @@ The visualizations below were created using `visualize_results.py` and can also 
 
 These results are based on videos analyzed the 7th of May 2023, results will vary if running the analysis again as it will be based on other videos.
 
-### Share of Completely Non-Toxic Channels
-
 ### Toxicity by Channel (HypeAuditor) Category
+![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/toxicity-by-category.png?raw=True)
+
+### Share of Completely Non-Toxic Channels
+![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/share-of-toxic-channels.png?raw=True)
 
 ### Top 10 most Toxic channels compared to Average
+![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/most-toxic-channels.png?raw=True)
 
 ## Limitations
 Some of the central limitations of this project should be addressed. <br>
