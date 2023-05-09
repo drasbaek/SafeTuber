@@ -36,7 +36,7 @@ def plot_share_of_toxic(data, results_path):
     values = [n_toxic_channels, n_non_toxic_channels]
 
     # set the color palette
-    colors = ['#FF6E78', '#50C878']
+    colors = ['#FF6D6A', '#77DD77']
     sns.set_palette(sns.color_palette(colors))
 
     # create pie chart
@@ -46,10 +46,16 @@ def plot_share_of_toxic(data, results_path):
     ax.pie(values, labels=labels, autopct='%1.1f%%', shadow=False, startangle=90)
 
     # set title
-    ax.set_title("Top 100: Share of channels with at least one toxic comment")
+    ax.set_title("Top 100: Share of Channels with at Least One Toxic Comment", fontsize=18, fontweight='bold')
+
+    # set background color
+    ax.set_facecolor('#F4E3CB')
+    fig.patch.set_facecolor('#F4E3CB')
 
     # save plot
-    plt.savefig(results_path / "share-of-toxic-channels.png")
+    plt.savefig(results_path / "share-of-toxic-channels.png", dpi=300, bbox_inches='tight')
+
+
 
 def plot_toxicity_by_category(data, results_path):
     '''
@@ -66,23 +72,27 @@ def plot_toxicity_by_category(data, results_path):
     share_toxic = share_toxic.sort_values(by="pct_toxic", ascending=False)
 
     # set the color palette
-    #colors = ['#FF6E78', '#50C878']
-    #sns.set_palette(sns.color_palette(colors))
+    colors = sns.color_palette("RdYlGn", n_colors=16)
+    sns.set_palette(colors)
 
     # create bar chart
-    fig, ax = plt.subplots(figsize=(10, 6))
-
-    # plot bar chart
+    fig, ax = plt.subplots(figsize=(12, 6))
     sns.barplot(x="categories", y="pct_toxic", data=share_toxic, ax=ax)
 
-    # set title
-    ax.set_title("Share of toxic comments by channel category")
+    # set title and axis labels
+    ax.set_title("Share of Toxic Comments by Channel Category", fontsize=18, fontweight='bold')
+    ax.set_xlabel("Category", fontsize=14)
+    ax.set_ylabel("Percentage of Toxic Comments", fontsize=14)
 
     # space out x-axis labels
     plt.xticks(rotation=45, ha="right")
 
+    # set background color
+    ax.set_facecolor('#F4E3CB')
+    fig.patch.set_facecolor('#F4E3CB')
+
     # save plot
-    plt.savefig(results_path / "toxicity-by-category.png")
+    plt.savefig(results_path / "toxicity-by-category.png", dpi=300, bbox_inches='tight')
 
 def plot_most_toxic_channels(data, results_path):
     '''
@@ -96,7 +106,12 @@ def plot_most_toxic_channels(data, results_path):
     avg_toxic = data["pct_toxic"].mean()
 
     # add average to dataframe
-    most_toxic = most_toxic.append({"name": "Top 100 Average", "pct_toxic": avg_toxic}, ignore_index=True)
+    most_toxic = most_toxic.append({"name": "Average (All Channels)", "pct_toxic": avg_toxic}, ignore_index=True)
+
+    # set color palette
+    n = len(most_toxic)
+    colors = sns.color_palette("Reds_r", n_colors=n)
+    sns.set_palette(colors)
 
     # create bar chart
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -105,13 +120,22 @@ def plot_most_toxic_channels(data, results_path):
     sns.barplot(x="name", y="pct_toxic", data=most_toxic, ax=ax)
 
     # set title
-    ax.set_title("The most toxic channels in the top 100")
+    ax.set_title("The Most Toxic Channels in the Top 100", fontsize=18, fontweight='bold')
+
+    # set x and y axis labels
+    ax.set_xlabel("Channel Name", fontsize=14)
+    ax.set_ylabel("Percentage of Toxic Comments", fontsize=14)
 
     # space out x-axis labels
     plt.xticks(rotation=45, ha="right")
 
+    # set background color
+    ax.set_facecolor('#F4E3CB')
+    fig.patch.set_facecolor('#F4E3CB')
+
     # save plot
-    plt.savefig(results_path / "most-toxic-channels.png")
+    plt.savefig(results_path / "most-toxic-channels.png", dpi=300, bbox_inches='tight')
+
 
 
 def main():
@@ -120,6 +144,9 @@ def main():
 
     # load data
     data = pd.read_csv(results_path / "top-youtubers-classified.csv")
+
+    # set style
+    sns.set_style("whitegrid")
 
     # plot share of toxic channels
     plot_share_of_toxic(data, results_path)
