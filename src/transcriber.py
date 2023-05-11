@@ -21,7 +21,7 @@ Usage:
     $ python src/transcriber.py --n_vids 4 --model "openai/whisper-medium.en"
 """
 
-
+# import packages
 from yt_dlp import YoutubeDL
 from pathlib import Path
 from tqdm import tqdm
@@ -35,6 +35,15 @@ import io
 import sys
 
 def define_paths():
+    """
+    Define paths to data, output, and temporary audio storage.
+
+    Returns:
+        inpath (Path): Path to data
+        outpath (Path): Path to output
+        audio_path (Path): Path to temporary audio storage
+    """
+
     # define path
     path = Path(__file__)
 
@@ -56,31 +65,37 @@ def define_paths():
 def get_channel_vids(channel_url):
     """
     Uses yt_dlp to get the video urls from a channel url.
-    It is necessary to obtain these urls from the terminal output as extract_info does not return those
+    It is necessary to obtain these urls from the terminal output as extract_info does not return those.
+
+    Args:
+        channel_url (str): URL of the YouTube channel
+    
+    Returns:
+        urls (list): List of video urls
     """
 
-    # Create a StringIO object to capture stdout
+    # create a StringIO object to capture stdout
     captured_output = io.StringIO()
 
-    # Redirect stdout to the StringIO object
+    # redirect stdout to the StringIO object
     sys.stdout = captured_output
 
-    # Run your code
+    # define ydl options
     ydl_opts = {'outtmpl': '%(id)s.%(ext)s', 
                 'playlistend': 30,
                 'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
                 }
-    
+    # download the channel
     with YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(
             channel_url,
             download=False
         )
 
-    # Restore stdout to its original value
+    # restore stdout to its original value
     sys.stdout = sys.__stdout__
 
-    # Print the captured output
+    # get output
     output = captured_output.getvalue()
 
     # extract all urls from output
@@ -94,8 +109,22 @@ def get_channel_vids(channel_url):
 
     return urls
 
-def download_mp4(outpath, url, max_duration, min_duration):
-    # get info
+def download_mp3(outpath, url, max_duration, min_duration):
+    """
+    Downloads an MP3 file from a YouTube video.
+    NOTE: This is immediately deleted after the audio has been transcribed.
+
+    Args:
+        outpath (Path): Path to output
+        url (str): URL of the YouTube video
+        max_duration (int): Maximum allowed duration of a video in seconds (check channel_reqs.txt for more info)
+        min_duration (int): Minimum allowed duration of a video in seconds (check channel_reqs.txt for more info))
+
+    Returns:
+        success_fail (int): 1 if the download was successful, 0 if it failed.
+    """
+
+    # get info on video
     ydl = YoutubeDL()
     info_dict = ydl.extract_info(url, download=False)
 
@@ -107,11 +136,12 @@ def download_mp4(outpath, url, max_duration, min_duration):
         print("Video too long, skipping to next..." + url)
         return 0 # return 0 for fail
     
+    # if duration is too short, skip
     if duration < 120:
         print("Video too short, skipping to next..." + url)
         return 0 # return 0 for fail
 
-    # else download
+    # else initialize ydl options
     else:
         ydl_opts = {
         'outtmpl': str(outpath) + '/%(title)s.%(ext)s',
@@ -124,15 +154,29 @@ def download_mp4(outpath, url, max_duration, min_duration):
     }],
         }
 
+        # attempt to download the video
         with YoutubeDL(ydl_opts) as ydl:
             try:
                 ydl.download([url])
                 return 1 # return 1 for success
             except:
-                return 0
+                return 0 # return 0 for a failed download
+
 
 def download_channel(n_vids, video_urls, outpath):
-    # get max n_vids from channel
+    """
+    Uses download_mp3 to download videos from a channel, the number is determined by n_vids.
+
+    Args:
+        n_vids (int): Number of videos to be downloaded
+        video_urls (list): List of video urls
+        outpath (Path): Path to output
+    
+    Returns:
+        used_urls (list): List of urls that were used to download videos
+    """
+
+    # get max n_vids from channel based on how many videos are available
     max_attempts = len(video_urls)
     
     # initialize list of used urls
@@ -148,25 +192,39 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
     
         try:
-            success_fail = download_mp4(outpath, url, max_duration=3000, min_duration=120)
+            success_fail = download_mp3(outpath, url, max_duration=3000, min_duration=120)
             n_downloads += success_fail
         
         except:
             print("Error downloading video: ", url)
         
+        # only append url if download was successful
         if success_fail == 1:
             used_urls.append(url)
     
-    # return used urls
     return used_urls
 
 def transcribe_audio(filename, transcriber, audio_path):
+    """
+    Transcribes an audio file using the HuggingFace pipeline.
+    The transcription is done with timestamps, in order to ensure proper chunking.
+
+    Args:
+        filename (str): Name of the audio file
+        transcriber (pipeline): HuggingFace pipeline for transcription
+        audio_path (Path): Path to audio file storage
+    
+    Returns:
+        text_chunks (list): List of text chunks from the transcription
+    """
+
+    # get audio file path
     file_path = str(audio_path / filename)
 
-    # get audio
+    # transcribe the audio
     transcript_dict = transcriber(file_path, max_new_tokens = 448)
 
-    # save dict to file
+    # get text chunks
     text_chunks = transcript_dict['chunks']
 
     # remove timestamps
