@@ -10,11 +10,16 @@ from utils import *
 import argparse
 
 def arg_parse():
-    '''
-    Parse command line arguments.
+    """
+    Parse command line arguments to script.
+    It is possible to specify:
+    - The number of videos to be analyzed
+    - The model to be used for transcription
+    - The YouTube URL of the channel to be analyzed.
+
     Returns:
-    -   args (argparse.Namespace): Parsed arguments.
-    '''
+      args (argparse.Namespace): Parsed arguments.
+    """
     
     # define parser
     parser = argparse.ArgumentParser(description='Classify toxicity of YouTube Channel')
@@ -31,17 +36,37 @@ def arg_parse():
 
 
 def initialize_models(args):
+    """
+    Initializes both the transcriber and classifier models.
+
+    Args:
+        args (argparse.Namespace): Parsed arguments.
+
+    Returns:
+        transcriber (pipeline): HuggingFace pipeline for automatic speech recognition
+        classifier (pipeline): HuggingFace pipeline for text classification
+    """
+
+    # initialize transcriber
     transcriber = pipeline('automatic-speech-recognition', 
                            model=args.model,
                            chunk_length_s = 30, # must be 30 to chunk correctly
                            return_timestamps=True)
     
+    # initialize classifier
     classifier = pipeline("text-classification", 
                           model = "martin-ha/toxic-comment-model")
 
     return transcriber, classifier
 
 def create_audio_path():
+    """
+    Creates a path to temporarily store audio files.
+
+    Returns:
+        audio_path (Path): Path for audio file storage
+    """
+
     # define path
     path = Path(__file__)
 
@@ -57,8 +82,17 @@ def create_audio_path():
 
 def toxicity_output(all_text_chunks, classifications):
     """
-    Calculate toxicity aggregates.
+    Provides toxicity output for a channel, ready to be printed.
+
+    Args:
+        all_text_chunks (list): List of all text chunks for a channel
+        classifications (list): List of classifications for all text chunks
+    
+    Returns:
+        main_output (str): Main output for channel based on toxicity statistics 
+        toxic_output (str): Additional output with example of a toxic comment if there is one
     """
+    
     # calculate percentage of toxic comments
     n_toxic = classifications.count("toxic")
     n_comments = len(classifications)
