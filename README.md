@@ -11,6 +11,29 @@ Based on a ranking of the most popular YouTube channels by [HypeAuditor](https:/
 
 The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents to assess which content creators are child-friendly and who are not. "Safetubers" analysis of 100 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process by combining utilizing multiple language models in a single pipeline.
 
+## Repository Tree
+```
+├── README.md                       
+├── channel_reqs.txt                    <----- YT Channel requirements for functioning in the pipeline
+├── data
+│   ├── top-youtubers-raw.csv           <----- Raw file of the top 100 selected YouTubers
+│   └── top-youtubers-transcribed.csv
+├── out
+│   ├── most-toxic-channels.png
+│   ├── share-of-toxic-channels.png
+│   ├── top-youtubers-classified.csv   <----- Detailed output with transcriptions and classificationsf for top 100
+│   └── toxicity-by-category.png
+├── requirements.txt
+├── setup_linux.sh
+├── setup_mac.sh
+└── src
+    ├── classifier.py                  <----- Classification of all top 100 YouTube Channels
+    ├── single_classify.py             <----- Transcription and classification of single, new YouTube channel
+    ├── transcriber.py                 <----- Transcription of all top 100 YouTube Channels
+    ├── utils.py
+    └── visualizations.py              <----- Visualizations of results in out directory
+```
+
 ## Setup
 To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems differ in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis. <br>
 
