@@ -25,6 +25,14 @@ import pandas as pd
 from tqdm import tqdm
 
 def define_paths():
+    """
+    Define paths to data and output.
+
+    Returns:
+        inpath (Path): Path to data
+        outpath (Path): Path to output
+    """
+
     # define path
     path = Path(__file__)
 
@@ -39,7 +47,14 @@ def define_paths():
 
 def classify_transcript(text_chunks, classifier):
     """
-    Classify text chunks as toxic or not toxic.
+    Classifies text chunks as either toxic or not toxic.
+
+    Args:
+        text_chunks (list): List of text chunks
+        classifier (pipeline): HuggingFace pipeline for text classification
+    
+    Returns:
+        classifications (list): List of classifications
     """
 
     # initialize empty list to store classifications
@@ -57,8 +72,19 @@ def classify_transcript(text_chunks, classifier):
 
 def toxicity_aggregates(text_chunks, classifications):
     """
-    Calculate toxicity aggregates.
+    Calculate toxicity aggregates based on classifications.
+
+    Args:
+        text_chunks (list): List of text chunks
+        classifications (list): List of classifications
+
+    Returns:
+        n_comments (int): Total number of comments
+        n_toxic (int): Number of toxic comments
+        pct_toxic (float): Percentage of toxic comments
+        toxic_comments (str): String with all toxic comments
     """
+    
     # calculate percentage of toxic comments
     n_toxic = classifications.count("toxic")
     n_comments = len(classifications)
