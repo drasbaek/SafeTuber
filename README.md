@@ -86,11 +86,15 @@ These results are based on videos analyzed the 7th of May 2023, results will var
 ### Top 10 most Toxic channels compared to Average
 ![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/most-toxic-channels.png?raw=True)
 
-## Limitations
-Some of the central limitations of this project should be addressed. <br/><br/>
-Firstly, it only looks at YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos. <br>
-Also, channels are only analyzed in terms of their most recent videos and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. <br>
-Finally, `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications as a closer inspection of the results also will reveal. <br>
+## Discussion & Limitations
+Overall, the results show that only 14% of the channels had no toxic channels, despite the fact that we only analyzed non age-restricted videos. The results were astoundingly different across the channel categories. Whereas categories such as Animals & Pets and Mystery showed no toxic content, an Animation channel had 7% toxic comments on average. Daily vlogs and fitness follows close after as the second and third most toxic channel categories. <br>
+
+In terms of the most toxic channels, Fornite icon Ninja comes in at first with almost 30 percent of all comments uttered being toxic. penguinz0 joins Ninja as the only other channel with over 20% of comments being toxic. <br>
+
+Some of the central limitations of this project and its results should be addressed:
+* It only looks at YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos.
+* Channels are only analyzed in terms of their most recent videos and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. <br>
+* `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications as a closer inspection of the results also will reveal (it seems that YouTubers who swear as seen as extremely toxic, which is debatable). 
 
 Despite all of this, the Safetubers pipeline provides forms a skeleton for analyzing toxicity on YouTube using objective criteria, contributing to enhancing parental understanding of how all internet personalities may not be equally child-friendly.
 
