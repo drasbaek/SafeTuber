@@ -24,7 +24,7 @@ def remove_long_chunks(text_chunks):
     new_text_chunks = []
 
     # loop through chunks
-    for text in text_chunks:
+    for text_chunk in text_chunks:
 
         # if text is beyond maximum input length for classifier, we shorten to nearest punctuation
         if len(text_chunk) > 512:
@@ -36,12 +36,12 @@ def remove_long_chunks(text_chunks):
             text_chunk = text_chunk[:last_index+1]
         
         # if text of medium length, skip
-        if len(text.split()) > 25:
+        if len(text_chunk.split()) > 25:
             continue
 
         # else add to new list
         else:
-            new_text_chunks.append(text)
+            new_text_chunks.append(text_chunk)
 
     return new_text_chunks
 
