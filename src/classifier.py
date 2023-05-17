@@ -29,8 +29,8 @@ def define_paths():
     Define paths to data and output.
 
     Returns:
-        inpath (Path): Path to data
-        outpath (Path): Path to output
+        inpath (pathlib.PosixPath): Path to data
+        outpath (pathlib.PosixPath): Path to output
     """
 
     # define path
@@ -138,7 +138,6 @@ def main():
         data.loc[i, "toxic_comments"] = toxic_comments
 
     # save data
-    #data.to_csv(outpath / "top-youtubers-classified.csv", index = False)
     data.to_csv(outpath / "top-youtubers-classified.csv", index = False)
 
 
