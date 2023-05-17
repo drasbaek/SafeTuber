@@ -208,12 +208,12 @@ def download_channel(n_vids, video_urls, outpath):
 def transcribe_audio(filename, transcriber, audio_path):
     """
     Transcribes an audio file using the HuggingFace pipeline.
-    The transcription is done with timestamps, in order to ensure proper chunking.
+    The transcription is done with timestamps in order to ensure proper chunking.
 
     Args:
         filename (str): Name of the audio file
         transcriber (pipeline): HuggingFace pipeline for transcription
-        audio_path (Path): Path to audio file storage
+        audio_path (pathlib.PosixPath): Path to audio file storage
     
     Returns:
         text_chunks (list): List of text chunks from the transcription
@@ -250,7 +250,7 @@ def main():
     data["transcript_chunks"] = None
     data["video_urls"] = None
 
-    # loop through all channels (rows) with tqdm
+    # loop through all channels
     print("Downloading videos and transcribing...")
     for i, row in tqdm(data.iterrows(), total = len(data)):
         # get channel url
