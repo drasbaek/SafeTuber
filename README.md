@@ -1,8 +1,15 @@
 # Assignment 5 (Self-Assigned): The SafeTuber Pipeline
 ![copy-test](https://user-images.githubusercontent.com/80207895/236698306-3499d444-c791-497b-a10b-2b6a7b087e9c.png)
 
+## Repository Overview
+1. [Description & Motivation](#description)
+2. [Repository Tree](#tree)
+3. [Setup](#setup)
+5. [Usage](gusage)
+6. [Results](#results)
+8. [Discussion & Limitations](#discussion)
 
-## Description
+## Description & Motivation <a name="description"></a>
 This repository forms the solution to self-chosen assignment 5 by Anton Drasbæk Schiønning (202008161) in the course "Language Analytics" at Aarhus University. <br>
 
 The **SafeTuber** pipeline is a tool that quantifies the amount of toxic speech used by the top YouTubers. <br> 
@@ -13,7 +20,7 @@ The motivation behind this project is to provide a tool which may bridge the gen
 
 **DISCLAIMER**: *The pipeline worked as of May 31st, 2023. As it is sensitive to changes in YouTube's API, certain functions may break over time and rely on updates from the package [`yt_dlp`](https://github.com/yt-dlp/yt-dlp). Bugs will most likely pertain to `get_channel_vids()` and `download_mp3()` functions in `transcriber.py`*.
 
-## Repository Tree
+## Repository Tree <a name="tree"></a>
 ```
 ├── README.md                       
 ├── channel_reqs.txt                    <----- YT Channel requirements for functioning in the pipeline
@@ -36,7 +43,7 @@ The motivation behind this project is to provide a tool which may bridge the gen
     └── visualizations.py              <----- Visualizations of results in out directory
 ```
 
-## Setup
+## Setup <a name="setup"></a>
 To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems differ in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis. <br>
 
 To install requirements, create a virtual environment and install ffmpeg, run the following from the root directory
@@ -45,7 +52,7 @@ bash setup_mac.sh     # for MacOS users
 bash setup_linux.sh   # for Linux users
 ```
 
-## Usage
+## Usage <a name="usage"></a>
 ### Running the Analysis (Top 100 channels)
 To run the analysis, you must first run `transcriber.py` which obtains video urls, extracts audio files, transcribes them and merges it into chunks for each channel:
 ```
@@ -84,7 +91,7 @@ Here is an example of a toxic comment from the channel:
 ```
 
 
-## Results (Top 100 channels)
+## Results (Top 100 channels) <a name="results"></a>
 Overall, **22,316 transcript chunks from 300 different videos were classified**, 3.6% of which were deemed to be toxic (796 toxic comments/chunks).
 
 The visualizations below were created using `visualizations.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
@@ -100,7 +107,7 @@ These results are based on videos analyzed the 7th of May 2023, results will var
 ### Top 10 most Toxic channels compared to Average
 ![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/most-toxic-channels.png?raw=True)
 
-## Discussion & Limitations
+## Discussion & Limitations <a name="discussion"></a>
 Overall, the results show that only 14% of the channels made no toxic comments across 3 videos, despite the fact that we only analyzed non age-restricted videos. The results were astoundingly different across the channel categories. Whereas categories such as *Animals & Pets* and *Mystery* showed no toxic content, an *Animation* channels had 7% toxic comments on average. *Daily vlogs* and *fitness* follows close after as the second and third most toxic channel categories. <br>
 
 In terms of the most toxic channels, Fornite icon Ninja comes in at first with almost 30 percent of all comments uttered being toxic. penguinz0 joins Ninja as the only other channel with over 20% of comments being toxic. <br>
