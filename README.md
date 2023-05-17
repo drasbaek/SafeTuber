@@ -87,7 +87,7 @@ Here is an example of a toxic comment from the channel:
 ## Results (Top 100 channels)
 Overall, **22,316 transcript chunks from 300 different videos were classified**, 3.6% of which were deemed to be toxic (796 toxic comments/chunks).
 
-The visualizations below were created using `visualize_results.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
+The visualizations below were created using `visualizations.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
 
 These results are based on videos analyzed the 7th of May 2023, results will vary if running the analysis again as it will be based on other videos.
 
