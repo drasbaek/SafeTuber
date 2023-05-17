@@ -14,7 +14,7 @@ Desc:
         4. Transcribing audio files
         5. Merging and shuffling transcripts.
 
-    This script analyzes all the 200 channels in the top-youtubers-curated.csv file and provides transcriptions of their recent
+    This script analyzes all the 100 channels in the top-youtubers-curated.csv file and provides transcriptions of their recent
     videos in data/top-youtubers-transcribed.csv.
 
 Usage:
@@ -26,7 +26,6 @@ from yt_dlp import YoutubeDL
 from pathlib import Path
 from tqdm import tqdm
 from transformers import pipeline
-import torch
 from utils import *
 import pandas as pd
 import os
@@ -39,9 +38,9 @@ def define_paths():
     Define paths to data, output, and temporary audio storage.
 
     Returns:
-        inpath (Path): Path to data
-        outpath (Path): Path to output
-        audio_path (Path): Path to temporary audio storage
+        inpath (pathlib.PosixPath): Path to data
+        outpath (pathlib.PosixPath): Path to output
+        audio_path (pathlib.PosixPath): Path to temporary audio storage
     """
 
     # define path
@@ -85,6 +84,7 @@ def get_channel_vids(channel_url):
                 'playlistend': 30,
                 'ignoreerrors': True # necessary to skip videos that fail (e.g. due to age or country restrictions)
                 }
+    
     # download the channel
     with YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(
@@ -103,6 +103,7 @@ def get_channel_vids(channel_url):
 
     for line in output.splitlines():
         if "https://www.youtube.com/watch?v=" in line:
+            
             # extract only the url from the line
             url = line.split(" ")[-1]
             urls.append(url)
@@ -112,13 +113,13 @@ def get_channel_vids(channel_url):
 def download_mp3(outpath, url, max_duration, min_duration):
     """
     Downloads an MP3 file from a YouTube video.
-    NOTE: This is immediately deleted after the audio has been transcribed.
+    NOTE: This is immediately deleted after the audio has been transcribed to comply with YouTube's terms of service and save memory.
 
     Args:
-        outpath (Path): Path to output
+        outpath (pathlib.PosixPath): Path to output
         url (str): URL of the YouTube video
         max_duration (int): Maximum allowed duration of a video in seconds (check channel_reqs.txt for more info)
-        min_duration (int): Minimum allowed duration of a video in seconds (check channel_reqs.txt for more info))
+        min_duration (int): Minimum allowed duration of a video in seconds (check channel_reqs.txt for more info)
 
     Returns:
         success_fail (int): 1 if the download was successful, 0 if it failed.
@@ -165,12 +166,12 @@ def download_mp3(outpath, url, max_duration, min_duration):
 
 def download_channel(n_vids, video_urls, outpath):
     """
-    Uses download_mp3 to download videos from a channel, the number is determined by n_vids.
+    Uses download_mp3 function to download videos from a channel, the number is determined by n_vids.
 
     Args:
         n_vids (int): Number of videos to be downloaded
         video_urls (list): List of video urls
-        outpath (Path): Path to output
+        outpath (pathlib.PosixPath): Path to output
     
     Returns:
         used_urls (list): List of urls that were used to download videos
