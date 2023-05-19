@@ -139,7 +139,7 @@ def main():
     video_urls = get_channel_vids(args.url)
 
     # download videos
-    print("(3/7) Downloading MP3s...")
+    print("(3/7) Downloading .wav files...")
     used_urls = download_channel(n_vids = args.n_vids, video_urls = video_urls, outpath = audio_path)
 
     # initialize transcriber and classifier
