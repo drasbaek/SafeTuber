@@ -5,13 +5,13 @@ Author:
 Desc:
     Transcribes videos from youtube channels based on the channel url.
     It utilizes the youtube-dl library to download the videos and the HuggingFace transformers library to transcribe the audio.
-    Specifically, OpenAI's Whisper is used to transcribe the obtained MP3 files.
-    A temporary audio storage is created to store the MP3 files before they are transcribed.
+    Specifically, OpenAI's Whisper is used to transcribe the obtained .wav files.
+    A temporary audio storage is created to store the .wav files before they are transcribed.
 
     Hence, this file covers the first 5 steps in the SafeTuber pipeline:
         1. Identifying YouTube channel
         2. Getting recent video urls
-        3. Downloading MP3s
+        3. Downloading .wav files
         4. Transcribing audio files
         5. Merging and shuffling transcripts.
 
@@ -62,6 +62,7 @@ def define_paths():
 
     return inpath, outpath, audio_path
 
+
 def get_channel_vids(channel_url):
     """
     Uses yt_dlp to get the video urls from a channel url.
@@ -111,9 +112,10 @@ def get_channel_vids(channel_url):
 
     return urls
 
-def download_mp3(outpath, url, max_duration, min_duration):
+
+def download_wav(outpath, url, max_duration, min_duration):
     """
-    Downloads an MP3 file from a YouTube video.
+    Downloads a .wav file from a YouTube video.
     NOTE: This is immediately deleted after the audio has been transcribed to comply with YouTube's terms of service and save memory.
 
     Args:
@@ -147,12 +149,12 @@ def download_mp3(outpath, url, max_duration, min_duration):
     else:
         ydl_opts = {
         'outtmpl': str(outpath) + '/%(title)s.%(ext)s',
-        'format': 'bestaudio/best',
+        'format': 'bestaudio/best', # downloads best audio
         'ignoreerrors': True , # necessary to skip videos that fail (e.g. due to age or country restrictions)
-        'quiet': True, # don't print to stdout
+        'quiet': True,
         'postprocessors': [{
         'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'wav'
+        'preferredcodec': 'wav' # use .wav format
     }],
         }
 
@@ -167,7 +169,7 @@ def download_mp3(outpath, url, max_duration, min_duration):
 
 def download_channel(n_vids, video_urls, outpath):
     """
-    Uses download_mp3 function to download videos from a channel, the number is determined by n_vids.
+    Uses download_wav function to download videos from a channel, the number is determined by n_vids.
 
     Args:
         n_vids (int): Number of videos to be downloaded
@@ -239,7 +241,8 @@ def main():
     inpath, outpath, audio_path = define_paths()
 
     # load data from inpath
-    data = pd.read_excel(inpath)
+    print("Loading data...")
+    data = pd.read_csv(inpath)
 
     # initialize models
     transcriber = pipeline('automatic-speech-recognition', 
