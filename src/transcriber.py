@@ -196,7 +196,7 @@ def download_channel(n_vids, video_urls, outpath):
         n_attempt += 1
     
         try:
-            success_fail = download_mp3(outpath, url, max_duration=3000, min_duration=120)
+            success_fail = download_wav(outpath, url, max_duration=3000, min_duration=120)
             n_downloads += success_fail
         
         except:
