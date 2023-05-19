@@ -2,6 +2,7 @@
 import pandas as pd
 from pathlib import Path
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import seaborn as sns
 
 
@@ -97,6 +98,7 @@ def plot_toxicity_by_category(data, results_path):
     ax.set_title("Share of Toxic Comments by Channel Category", fontsize=18, fontweight='bold')
     ax.set_xlabel("Category", fontsize=14)
     ax.set_ylabel("Percentage of Toxic Comments", fontsize=14)
+    
 
     # space out x-axis labels
     plt.xticks(rotation=45, ha="right")
@@ -165,8 +167,10 @@ def main():
     # load data
     data = pd.read_csv(results_path / "top-youtubers-classified.csv")
 
-    # set style
+    # set style for all plots
     sns.set_style("whitegrid")
+
+    mpl.rc('font', family='Times New Roman')
 
     # plot share of toxic channels
     plot_share_of_toxic(data, results_path)
