@@ -95,7 +95,7 @@ Here is an example of a toxic comment from the channel:
 
 
 ## Results (Top 100 channels) <a name="results"></a>
-Overall, **22,316 transcript chunks from 300 different videos were classified**, 3.6% of which were deemed to be toxic (796 toxic comments/chunks).
+Overall, **22,316 transcript comments/chunks from 300 different videos were classified**, 3.6% of which were deemed to be toxic (796 toxic comments/chunks).
 
 The visualizations below were created using `visualizations.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
 
@@ -111,7 +111,7 @@ These results are based on videos analyzed the 7th of May 2023, results will var
 ![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/most-toxic-channels.png?raw=True)
 
 ## Discussion & Limitations <a name="discussion"></a>
-Overall, the results show that only 14% of the channels made no toxic comments across 3 videos, despite the fact that we only analyzed non age-restricted videos. The results were astoundingly different across the channel categories. Whereas categories such as *Animals & Pets* and *Mystery* showed no toxic content, an *Animation* channels had 7% toxic comments on average. *Daily vlogs* and *fitness* follows close after as the second and third most toxic channel categories. <br>
+Overall, the results show that only 14% of the channels made no toxic comments across 3 videos, despite the fact that we only analyzed videos without age-restrictions. The results were astoundingly different across the channel categories. Whereas categories such as *Animals & Pets* and *Mystery* showed no toxic content, an *Animation* channels had 7% toxic comments on average. *Daily vlogs* and *fitness* follows close after as the second and third most toxic channel categories. <br>
 
 In terms of the most toxic channels, Fornite icon Ninja comes in at first with almost 30 percent of all comments uttered being toxic. penguinz0 joins Ninja as the only other channel with over 20% of comments being toxic. <br>
 
