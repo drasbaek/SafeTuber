@@ -23,6 +23,20 @@ def define_paths():
     return results_path
 
 
+def set_layout():
+    """
+    Sets general layout for matplotlib plots that will be used in all the visualizations.
+
+    """
+
+    # set style to whitegrid for all plots
+    sns.set_style("whitegrid")
+
+    # set font to Times New Roman
+    mpl.rc('font', family='Times New Roman')
+
+
+
 def plot_share_of_toxic(data, results_path):
     '''
     Plots a piechart displaying the share of youtube channels with at least one toxic comment.
@@ -167,10 +181,8 @@ def main():
     # load data
     data = pd.read_csv(results_path / "top-youtubers-classified.csv")
 
-    # set style for all plots
-    sns.set_style("whitegrid")
-
-    mpl.rc('font', family='Times New Roman')
+    # set general layout
+    set_layout()
 
     # plot share of toxic channels
     plot_share_of_toxic(data, results_path)
