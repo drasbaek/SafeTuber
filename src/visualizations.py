@@ -1,3 +1,19 @@
+""" visualizations.py
+Author: 
+    Anton Drasbæk Schiønning (202008161), GitHub: @drasbaek
+
+Desc:
+    This script creates visualizations of the results of the classifier.
+    Concretely, it takes the top-youtubers-classified.csv file and creates three plots:
+        1. A pie chart displaying the share of youtube channels with at least one toxic comment.
+        2. A bar chart displaying the share of toxic comments by category.
+        3. A bar chart displaying the most toxic channels.
+        
+Usage:
+    $ python src/visualizations.py
+"""
+
+
 # install packages
 import pandas as pd
 from pathlib import Path
@@ -81,7 +97,6 @@ def plot_share_of_toxic(data, results_path):
 
     # save plot
     plt.savefig(results_path / "share-of-toxic-channels.png", dpi=300, bbox_inches='tight')
-
 
 
 def plot_toxicity_by_category(data, results_path):
@@ -171,7 +186,6 @@ def plot_most_toxic_channels(data, results_path):
 
     # save plot
     plt.savefig(results_path / "most-toxic-channels.png", dpi=300, bbox_inches='tight')
-
 
 
 def main():
