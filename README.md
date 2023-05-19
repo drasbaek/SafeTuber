@@ -1,5 +1,5 @@
 # Assignment 5 (Self-Assigned): The SafeTuber Pipeline
-![copy-test](https://user-images.githubusercontent.com/80207895/236698306-3499d444-c791-497b-a10b-2b6a7b087e9c.png)
+![safetuber-pipeline](https://github.com/drasbaek/SafeTuber/assets/80207895/037b8adc-9fc9-426d-b3e8-aff4a1c95b27)
 
 ## Repository Overview
 1. [Description & Motivation](#description)
