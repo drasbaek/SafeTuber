@@ -1,9 +1,18 @@
+# install packages
 import pandas as pd
 from pathlib import Path
-
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+
 def define_paths():
+    """
+    Defines path to out folder
+
+    Returns:
+        results_path (pathlib.PosixPath): Path to out folder
+    """
+
     # define path
     path = Path(__file__)
 
@@ -12,6 +21,7 @@ def define_paths():
 
     return results_path
 
+
 def plot_share_of_toxic(data, results_path):
     '''
     Plots a piechart displaying the share of youtube channels with at least one toxic comment.
@@ -19,7 +29,9 @@ def plot_share_of_toxic(data, results_path):
 
     Args:
         data (pd.DataFrame): dataframe with the results of the classifier
+        results_path (pathlib.PosixPath): path to out folder
     '''
+
     # get share of toxic channels
     toxic_channels = data[data["n_toxic"] > 0]
 
@@ -64,7 +76,9 @@ def plot_toxicity_by_category(data, results_path):
 
     Args:
         data (pd.DataFrame): dataframe with the results of the classifier
+        results_path (pathlib.PosixPath): path to out folder
     '''
+
     # get share of toxic comments by category
     share_toxic = data.groupby("categories")["pct_toxic"].mean().reset_index()
 
@@ -94,11 +108,17 @@ def plot_toxicity_by_category(data, results_path):
     # save plot
     plt.savefig(results_path / "toxicity-by-category.png", dpi=300, bbox_inches='tight')
 
+
 def plot_most_toxic_channels(data, results_path):
     '''
     Plots a barchart showing the 10 most toxic channels in the top 100 as well as the average for all channels.
     Plot is saved as a png file in the out folder.
+
+    Args:
+        data (pd.DataFrame): dataframe with the results of the classifier
+        results_path (pathlib.PosixPath): path to out folder
     '''
+
     # get the 10 most toxic channels
     most_toxic = data.sort_values(by="pct_toxic", ascending=False).head(10)
 
