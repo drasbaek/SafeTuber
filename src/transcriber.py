@@ -6,6 +6,7 @@ Desc:
     Transcribes videos from youtube channels based on the channel url.
     It utilizes the youtube-dl library to download the videos and the HuggingFace transformers library to transcribe the audio.
     Specifically, OpenAI's Whisper is used to transcribe the obtained MP3 files.
+    A temporary audio storage is created to store the MP3 files before they are transcribed.
 
     Hence, this file covers the first 5 steps in the SafeTuber pipeline:
         1. Identifying YouTube channel
