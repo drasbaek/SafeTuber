@@ -45,7 +45,7 @@ The motivation behind this project is to provide a tool which may bridge the gen
 ```
 
 ## Setup <a name="setup"></a>
-**NB:** *This setup will use sudo to install ffmpeg to your device. This is necessary for replicating the analysis.* 
+**NB:** *This setup will use **brew** or **sudo** to install ffmpeg to your device. This is necessary for replicating the analysis.* 
 <br>
 <br>
 To replicate the analysis, you must have Python3 installed and run the setup file. The setup file varies between MacOS and Linux, as these operating systems differ in their way to install [ffmpeg](https://ffmpeg.org/) which is required for the analysis. <br>
