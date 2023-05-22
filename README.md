@@ -15,7 +15,7 @@ This repository forms the solution to self-chosen assignment 5 by Anton Drasbæk
 
 The **SafeTuber** pipeline is a tool that quantifies the amount of toxic speech used by the top YouTubers. <br> 
 
-Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube/), we have identified and analyzed 100 of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or main stream company channels (e.g. Netflix).
+Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube-all-united-states/), we have identified and analyzed 100 of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or main stream company channels (e.g. Netflix).
 
 The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents, who did not grown up online, to assess which content creators are child-friendly and who are not. The **SafeTuber** analysis of 100 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process by utilizing multiple language models in a single pipeline.
 
@@ -24,7 +24,7 @@ The motivation behind this project is to provide a tool which may bridge the gen
 ## Repository Tree <a name="tree"></a>
 ```
 ├── README.md                       
-├── channel_reqs.txt                    <----- YT Channel requirements for functioning in the pipeline
+├── channel_reqs.md                    <----- YT Channel requirements for functioning in the pipeline
 ├── data
 │   ├── top-youtubers-raw.csv           <----- Raw file of the top 100 selected YouTubers
 │   └── top-youtubers-transcribed.csv
@@ -76,7 +76,7 @@ The results are saved to the `out` directory as `top-youtubers-classified.csv`.
 <br/><br/>
 
 ### Analyze a New Channel
-It is also possible to run the analysis for a new channel that is not on the pre-spcecified list using `single_classify.py`. Please note that channels must confirm with requirements specified in `channel_reqs.txt` in order for the analysis to be possible. <br>
+It is also possible to run the analysis for a new channel that is not on the pre-spcecified list using `single_classify.py`. Please note that channels must confirm with requirements specified in `channel_reqs.md` in order for the analysis to be possible. <br>
 
 To do analysis, first obtain the channel's url. In addition, you can also specify `--model` and `--n_vids` arguments for this analysis:
 ```
