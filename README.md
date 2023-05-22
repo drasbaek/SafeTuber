@@ -13,7 +13,7 @@
 ## Description & Motivation <a name="description"></a>
 This repository forms the solution to self-chosen assignment 5 by *Anton Drasbæk Schiønning (202008161)* in the course "Language Analytics" at Aarhus University. <br>
 
-The **SafeTuber** pipeline is an innovative tool designed to quantify the extent of toxic speech used by top YouTubers. It leverages multiple [Huggingface pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) to transform speech to text and classify toxicity levels. Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube-all-united-states/), I have used the pipeline on a curated top 100 list of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or mainstream company channels (e.g. Netflix).
+The **SafeTuber** pipeline is an tool designed to quantify the extent of toxic speech used by top YouTubers. It leverages multiple [Huggingface pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) to transform speech to text and classify toxicity levels. Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube-all-united-states/), the pipieline is used on a curated top 100 list of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or mainstream company channels (e.g. Netflix).
 
 The motivation behind this project is to bridge the generational gap in understanding internet culture. With children spending significant amounts of time consuming YouTube content, parents who didn't grow up with the internet often struggle to assess which content creators are child-friendly and which are not. The **SafeTuber** analysis of 100 channels, along with the ability to analyze any provided channel, serves as a valuable tool to assist parents in navigating this challenging process.
 
@@ -123,7 +123,7 @@ Still, these results should only be interpreted with respect to some major limit
 
 Nevertheless, the Safetuber pipeline offers a framework for assessing toxicity on YouTube based on objective criteria, thereby helping to narrow the parental knowledge gap regarding child-friendly and inappropriate content creators.
 
-Moreover, this project serves as a demonstration of how language analytics can transcend the realm of textual databases. By utilizing sophisticated transcription tools, speech audio files can be properly analyzed, expanding the application of language analytics in analyzing different forms of media.
+Moreover, this project serves as a demonstration of how language analytics can transcend the realm of textual databases. By utilizing sophisticated transcription tools, speech audio files can also be properly analyzed, expanding the application of language analytics in utilizing different forms of media.
 
 
 
