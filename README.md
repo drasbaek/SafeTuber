@@ -92,7 +92,7 @@ Number of toxic comments: 25
 Percentage of toxic comments: 0.1157
     
 Here is an example of a toxic comment from the channel:
-"Shout out to Floyd. Hey Floyd, download Betr and maybe you can earn enough money to pay back my brother, you scumbag."
+"Bro, nothing. You're literally worthless. You lost a punching battle."
 ```
 
 
