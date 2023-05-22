@@ -17,7 +17,7 @@ The **SafeTuber** pipeline is a tool that quantifies the amount of toxic speech 
 
 The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents, who did not grown up online, to assess which content creators are child-friendly and who are not. The **SafeTuber** analysis of 100 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process.
 
-**DISCLAIMER**: *The pipeline worked as of May 31st, 2023. As it is sensitive to changes in YouTube's API, certain functions may break over time, relying on updates from the Python package [`yt_dlp`](https://github.com/yt-dlp/yt-dlp). Bugs will most likely pertain to `get_channel_vids()` and `download_mp3()` functions in `transcriber.py`*.
+**DISCLAIMER**: *The pipeline worked as of May 31st, 2023. As it is sensitive to changes in YouTube's API, certain functions may break over time, relying on updates from the Python package [`yt_dlp`](https://github.com/yt-dlp/yt-dlp). Bugs will most likely pertain to `get_channel_vids()` and `download_wav()` functions in `transcriber.py`*.
 
 ## Repository Tree <a name="tree"></a>
 ```
@@ -95,7 +95,7 @@ Here is an example of a toxic comment from the channel:
 
 
 ## Results (Top 100 channels) <a name="results"></a>
-The following results are based on videos analyzed the 7th of May 2023, results will vary if running the analysis again as it will be based on other videos. <br>
+The following results are based on videos analyzed the 7th of May 2023; results will vary if running the analysis again as it will be based on other videos. <br>
 
 From the 100 YouTube Channels, **22,316 transcript comments/chunks from 300 different videos were classified**, 3.6% of which were deemed to be toxic (796 toxic comments/chunks). The visualizations below were created using `visualizations.py` and can also be found in the `out` directory along with `top-youtubers-classified.csv` which contains the raw output data. <br>
 
@@ -109,16 +109,16 @@ From the 100 YouTube Channels, **22,316 transcript comments/chunks from 300 diff
 ![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/most-toxic-channels.png?raw=True)
 
 ## Discussion & Limitations <a name="discussion"></a>
-Overall, the results show that only 14% of the channels made no toxic comments across 3 videos, despite the fact that we **only** analyzed videos without age-restrictions. The results were astoundingly different across the channel categories. Whereas categories such as *Animals & Pets* and *Mystery* showed no toxic content, *Animation* channels had 7% toxic comments on average. *Daily vlogs* and *fitness* follows close after as the second and third most toxic channel categories. <br>
+Overall, the results show that only 14% of the channels made no toxic comments across three videos, despite the fact that we **only** analyzed videos without age restrictions. The results were astoundingly different across the channel categories. Whereas categories such as *Animals & Pets* and *Mystery* showed no toxic content, *Animation* channels had 7% toxic comments on average. *Daily vlogs* and *fitness* follows close after as the second and third most toxic channel categories. <br>
 
-In terms of the most toxic channels, the Fornite icon [Ninja](https://www.youtube.com/channel/UCAW-NpUFkMyCNrvRSSGIvDQ) comes in at first with almost 30 percent of all comments uttered being toxic. The commentary channel [penguinz0](https://www.youtube.com/@penguinz0) joins Ninja as the only other channel with over 20% of comments being toxic. <br>
+In terms of the most toxic channels, the Fortnite icon [Ninja](https://www.youtube.com/channel/UCAW-NpUFkMyCNrvRSSGIvDQ) comes in at first with almost 30 percent of all comments uttered being toxic. The commentary channel [penguinz0](https://www.youtube.com/@penguinz0) joins Ninja as the only other channel with over 20% of comments being toxic. <br>
 
-These results should only be regarded in the perspective of some massive limitations to this project:
+However, these results should only be interpreted in relation to some major limitations for the analysis:
 * As a product of language analytics, the **SafeTuber** pipeline only examines YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos.
-* Channels are only analyzed in terms of their most recent videos, and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. <br>
 * `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications. A closer inspection of the results also reveals that it classifies YouTubers who swear as very toxic which could be debated. Hence, concrete channel evaluations should be interpreted with this in mind.
+* Channels are only analyzed in terms of their most recent videos, and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. <br>
 
-Despite these limitations, the **Safetuber** pipeline provides forms a skeleton for analyzing toxicity on YouTube using objective criteria, contributing to enhancing parental understanding of how all internet personalities may not be equally child-friendly. In addition, it shows that analyzing language in NLP should extend beyond just text databases, as it can also be applied to speech audio files by utilizing sophisticated transcription tools.
+Despite these limitations, the **Safetuber** pipeline provides a skeleton for analyzing toxicity on YouTube using objective criteria, contributing to bridge the gap in parental understanding of which internet personalities are child-friendly and which are not. In addition, this project exemplifies that language analytics can extend beyond just usuing text databases, as techniques can also be used for speech audio files by utilizing sophisticated transcription tools.
 
 
 
