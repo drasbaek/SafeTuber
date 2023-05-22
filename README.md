@@ -61,7 +61,7 @@ To run the analysis, you must first run `transcriber.py` which obtains video url
 python src/transcriber.py
 ```
 By default, the transcription is done using [*whisper-base.en*](https://huggingface.co/openai/whisper-base.en), although other whisper models listed on [Huggingface](https://huggingface.co/models?pipeline_tag=automatic-speech-recognition&sort=downloads) are also compatible for either speeding up the process or making transcriptions better. <br/><br/>
-The model, along with the number of videos to analyze per channel (default is 3), can be specified with arguments as such:
+The model, along with the number of videos to analyze per channel (default: 3 vids), can be specified with arguments as such:
 ```
 # uses whisper small to transcribe, analyzes 5 videos per channel
 python src/transcriber.py --model "openai/whisper-small" --n_vids 5
