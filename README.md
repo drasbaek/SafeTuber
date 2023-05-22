@@ -113,12 +113,14 @@ Overall, the results show that only 14% of the channels made no toxic comments a
 
 In terms of the most toxic channels, the Fortnite icon [Ninja](https://www.youtube.com/channel/UCAW-NpUFkMyCNrvRSSGIvDQ) comes in at first with almost 30 percent of all comments uttered being toxic. The commentary channel [penguinz0](https://www.youtube.com/@penguinz0) joins Ninja as the only other channel with over 20% of comments being toxic. <br>
 
-However, these results should only be interpreted in relation to some major limitations for the analysis:
+However, these results should only be interpreted with respect to some major limitations for the analysis:
 * As a product of language analytics, the **SafeTuber** pipeline only examines YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos.
 * `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications. A closer inspection of the results also reveals that it classifies YouTubers who swear as very toxic which could be debated. Hence, concrete channel evaluations should be interpreted with this in mind.
 * Channels are only analyzed in terms of their most recent videos, and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. <br>
 
-Despite these limitations, the **Safetuber** pipeline provides a skeleton for analyzing toxicity on YouTube using objective criteria, contributing to bridge the gap in parental understanding of which internet personalities are child-friendly and which are not. In addition, this project exemplifies that language analytics can extend beyond just usuing text databases, as techniques can also be used for speech audio files by utilizing sophisticated transcription tools.
+Still, the **Safetuber** pipeline provides a skeleton for analyzing toxicity on YouTube using objective criteria, contributing to bridge the gap in parental understanding of which internet personalities are child-friendly and which are not. 
+
+In addition, this project exemplifies that language analytics can extend beyond just usuing text databases, as techniques can also be used for speech audio files by utilizing sophisticated transcription tools.
 
 
 
