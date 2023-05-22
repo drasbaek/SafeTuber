@@ -124,7 +124,7 @@ def plot_toxicity_by_category(data, results_path):
     sns.barplot(x="categories", y="pct_toxic", data=share_toxic, ax=ax)
 
     # set title and axis labels
-    ax.set_title("Share of Toxic Comments by Channel Category", fontsize=18, fontweight='bold')
+    ax.set_title("Share of Toxic Comments by Channel Category", fontsize=24, fontweight='bold')
     ax.set_xlabel("Category", fontsize=14)
     ax.set_ylabel("Percentage of Toxic Comments", fontsize=14)
     
@@ -171,7 +171,7 @@ def plot_most_toxic_channels(data, results_path):
     sns.barplot(x="name", y="pct_toxic", data=most_toxic, ax=ax)
 
     # set title
-    ax.set_title("The Most Toxic Channels in the Top 100", fontsize=18, fontweight='bold')
+    ax.set_title("The Most Toxic Channels in the Top 100", fontsize=24, fontweight='bold')
 
     # set x and y axis labels
     ax.set_xlabel("Channel Name", fontsize=14)
