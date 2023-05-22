@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# create virtual environment called lang_modelling_env
+# create virtual environment called safertube_env
 python3 -m venv safertube_env
 
 # activate virtual environment
@@ -9,5 +9,7 @@ source ./safertube_env/bin/activate
 python -m pip install -r requirements.txt
 
 # install ffmpeg
-#sudo apt update && sudo apt upgrade
 sudo apt install ffmpeg
+
+# bug where environment needs to be reactivated after installing ffmpeg
+source ./safertube_env/bin/activate
