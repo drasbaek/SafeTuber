@@ -11,11 +11,11 @@
 8. [Discussion & Limitations](#discussion)
 
 ## Description & Motivation <a name="description"></a>
-This repository forms the solution to self-chosen assignment 5 by Anton Drasbæk Schiønning (202008161) in the course "Language Analytics" at Aarhus University. <br>
+This repository forms the solution to self-chosen assignment 5 by *Anton Drasbæk Schiønning (202008161)* in the course "Language Analytics" at Aarhus University. <br>
 
-The **SafeTuber** pipeline is a tool that quantifies the amount of toxic speech used by the top YouTubers. It utilizes and combines multiple [Huggingface pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) in the process of going from speech to text to classification of toxicity levels. Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube-all-united-states/), we have applied the pipeline to a curated list of 100 of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or mainstream company channels (e.g. Netflix).
+The **SafeTuber** pipeline is an innovative tool designed to quantify the extent of toxic speech used by top YouTubers. It leverages multiple [Huggingface pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) to transform speech to text and classify toxicity levels. Based on a ranking of the most popular YouTube channels by [HypeAuditor](https://hypeauditor.com/top-youtube-all-united-states/), I have used the pipeline on a curated top 100 list of the most watched YouTube channels in the United States that are not music artists (e.g. Justin Bieber) or mainstream company channels (e.g. Netflix).
 
-The motivation behind this project is to provide a tool which may bridge the generational gap in understanding internet culture. Whereas children spend many hours consuming content on YouTube, it may be a cumbersome task for parents, who did not grown up online, to assess which content creators are child-friendly and who are not. The **SafeTuber** analysis of 100 channels, as well as a tool for analyzing any other provided channel, can help guide parents in this tough process.
+The motivation behind this project is to bridge the generational gap in understanding internet culture. With children spending significant amounts of time consuming YouTube content, parents who didn't grow up with the internet often struggle to assess which content creators are child-friendly and which are not. The **SafeTuber** analysis of 100 channels, along with the ability to analyze any provided channel, serves as a valuable tool to assist parents in navigating this challenging process.
 
 **DISCLAIMER**: *The pipeline worked as of May 31st, 2023. As it is sensitive to changes in YouTube's API, certain functions may break over time, relying on updates from the Python package [`yt_dlp`](https://github.com/yt-dlp/yt-dlp). Bugs will most likely pertain to `get_channel_vids()` and `download_wav()` functions in `transcriber.py`*.
 
@@ -61,13 +61,14 @@ To run the analysis, you must first run `transcriber.py` which obtains video url
 python src/transcriber.py
 ```
 By default, the transcription is done using [*whisper-base.en*](https://huggingface.co/openai/whisper-base.en), although other whisper models listed on [Huggingface](https://huggingface.co/models?pipeline_tag=automatic-speech-recognition&sort=downloads) are also compatible for either speeding up the process or making transcriptions better. <br/><br/>
-The model, along with the number of videos to analyze per channel (default: 3 vids), can be specified with arguments as such:
+The model, along with the number of videos to analyze per channel (default: 3 videos), can be specified with arguments as such:
 ```
 # uses whisper small to transcribe, analyzes 5 videos per channel
 python src/transcriber.py --model "openai/whisper-small" --n_vids 5
 ```
+<br>
 
-Based on the transcriptions, classifications can be completed with `classifier.py`:
+Based on the transcriptions, classifications can be completed. The classifier used is [*martin-ha/toxic-comment-model*](https://huggingface.co/martin-ha/toxic-comment-model), a [*DistilBERT*](https://huggingface.co/docs/transformers/model_doc/distilbert) model fine-tuned for toxic commment classificaiton. Classifications are executed as such:
 ```
 python src/classifier.py
 ```
@@ -82,6 +83,7 @@ To do analysis, first obtain the channel's url. In addition, you can also specif
 # analyze Jake Paul based on 5 videos and transcribe using Whisper (base.en)
 python src/single_classify.py --url "https://www.youtube.com/@jakepaul" --n_vids 5 --model "openai/whisper-base.en" 
 ```
+<br>
 
 You will see a result for the channel printed to the terminal, such as:
 ```
@@ -109,18 +111,19 @@ From the 100 YouTube Channels, **22,316 transcript comments/chunks from 300 diff
 ![alt text](https://github.com/drasbaek/SafeTuber/blob/main/out/most-toxic-channels.png?raw=True)
 
 ## Discussion & Limitations <a name="discussion"></a>
-Overall, the results show that only 14% of the channels made no toxic comments across three videos, despite the fact that we **only** analyzed videos without age restrictions. The results were astoundingly different across the channel categories. Whereas categories such as *Animals & Pets* and *Mystery* showed no toxic content, *Animation* channels had 7% toxic comments on average. *Daily vlogs* and *fitness* follows close after as the second and third most toxic channel categories. <br>
+Overall, the results show that only 14% of the channels made no toxic comments across three videos, despite the fact that we **only** analyzed videos without age restrictions. However, the toxicity levels were astoundingly different across the channel categories. Whereas categories such as *Animals & Pets* and *Mystery* showed no toxic content, *Animation* channels had 7% toxic comments on average. *Daily vlogs* and *fitness* follows close after *Animation* as the second and third most toxic channel categories. <br>
 
-In terms of the most toxic channels, the Fortnite icon [Ninja](https://www.youtube.com/channel/UCAW-NpUFkMyCNrvRSSGIvDQ) comes in at first with almost 30 percent of all comments uttered being toxic. The commentary channel [penguinz0](https://www.youtube.com/@penguinz0) joins Ninja as the only other channel with over 20% of comments being toxic. <br>
+In terms of the most toxic channels, the Fortnite icon [Ninja](https://www.youtube.com/channel/UCAW-NpUFkMyCNrvRSSGIvDQ) comes in at first with almost 30 percent of all comments uttered being toxic. The commentary channel [penguinz0](https://www.youtube.com/@penguinz0) joins Ninja as the only other channel with over 20 percent of comments being toxic. <br>
 
-However, these results should only be interpreted with respect to some major limitations for the analysis:
+Still, these results should only be interpreted with respect to some major limitations for the analysis:
 * As a product of language analytics, the **SafeTuber** pipeline only examines YouTube channels based on the audio modality, ignoring all potentially toxic visual elements in videos.
-* `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications. A closer inspection of the results also reveals that it classifies YouTubers who swear as very toxic which could be debated. Hence, concrete channel evaluations should be interpreted with this in mind.
-* Channels are only analyzed in terms of their most recent videos, and there are great discrepancies in the amount of transcript analyzed across channels due to variation in normal video lengths. <br>
+* `martin-ha/toxic-comment-model` has not been fine-tuned for classifying YouTuber utterances specifically and may thus make misclassifications. A closer inspection of the results also reveals that it classifies YouTubers who swear as very toxic which could be debated. 
+* Channels are only analyzed in terms of their most recent videos which may not be representative for the channel as a whole.
+* There is a great disparity in the amount of speech analyzed across channels in the analysis due to variation in normal video lengths. <br>
 
-Still, the **Safetuber** pipeline provides a skeleton for analyzing toxicity on YouTube using objective criteria, contributing to bridge the gap in parental understanding of which internet personalities are child-friendly and which are not. 
+Nevertheless, the Safetuber pipeline offers a framework for assessing toxicity on YouTube based on objective criteria, thereby helping to narrow the parental knowledge gap regarding child-friendly and inappropriate content creators.
 
-In addition, this project exemplifies that language analytics can extend beyond just usuing text databases, as techniques can also be used for speech audio files by utilizing sophisticated transcription tools.
+Moreover, this project serves as a demonstration of how language analytics can transcend the realm of textual databases. By utilizing sophisticated transcription tools, speech audio files can be properly analyzed, expanding the application of language analytics in analyzing different forms of media.
 
 
 
