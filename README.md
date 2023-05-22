@@ -6,7 +6,7 @@
 1. [Description & Motivation](#description)
 2. [Repository Tree](#tree)
 3. [Setup](#setup)
-5. [Usage](gusage)
+5. [Usage](#usage)
 6. [Results](#results)
 8. [Discussion & Limitations](#discussion)
 
