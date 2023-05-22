@@ -129,21 +129,21 @@ def toxicity_output(all_text_chunks, classifications):
 def main():
     args = arg_parse()
 
-    print(f"(1/7) Identifying toxicity levels for {args.url}")
+    print(f"[1/7] Identifying toxicity levels for {args.url}")
 
     # create audio path
     audio_path = create_audio_path()
 
     # get channel videos
-    print("(2/7) Getting video urls...")
+    print("[2/7] Getting video urls...")
     video_urls = get_channel_vids(args.url)
 
     # download videos
-    print("(3/7) Downloading .wav files...")
+    print("[3/7] Downloading .wav files...")
     used_urls = download_channel(n_vids = args.n_vids, video_urls = video_urls, outpath = audio_path)
 
     # initialize transcriber and classifier
-    print("(4/7) Initialize models and transcribe audio...")
+    print("[4/7] Initialize models and transcribe audio...")
     transcriber, classifier = initialize_models(args)
 
     # define empty list to store text chunks
@@ -164,15 +164,15 @@ def main():
         os.remove(audio_path / audio_file)
         
     # shuffle list
-    print("(5/7) Merging and shuffling transcript...")
+    print("[5/7] Merging and shuffling transcript...")
     random.shuffle(all_text_chunks)
 
     # classify transcript chunks
-    print("(6/7) Classifying transcript chunks...")
+    print("[6/7] Classifying transcript chunks...")
     classifications = classify_transcript(all_text_chunks, classifier)
 
     # calculate toxicity aggregates
-    print("(7/7) Calculating aggregates...")
+    print("[7/7] Calculating aggregates...")
     main_output, toxic_output = toxicity_output(all_text_chunks, classifications)
     
 
