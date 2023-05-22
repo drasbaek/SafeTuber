@@ -10,3 +10,6 @@ python3 -m pip install -r requirements.txt
 
 # install ffmpeg
 brew install ffmpeg
+
+# bug where environment needs to be reactivated after installing ffmpeg
+source ./safertube_env/bin/activate
